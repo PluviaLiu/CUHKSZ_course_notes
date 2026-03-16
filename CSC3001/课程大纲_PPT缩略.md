@@ -637,7 +637,7 @@
         4.  此时4个子棋盘都变为“`2^n × 2^n` 且移除一格”，可应用I.H.解决。
 
 3.  **哈达玛矩阵 (Hadamard Matrix):** 元素为`±1`的 `n×n` 矩阵，任意两行正交（内积为0）。
-    *   **构造:** `H₁ = [1]`, `H_{2n} = \begin{bmatrix} H_n & H_n \\ H_n & -H_n \end{bmatrix}`。
+    *   **构造:** `H₁ = [1]`, $H_{2n} = \begin{bmatrix} H_n & H_n \\ H_n & -H_n \end{bmatrix}$。
     *   **结论:** 对任意 `k ≥ 0`，存在 `2^k × 2^k` 的哈达玛矩阵。
 
 #### ④ 关键点与注意事项 (Key Points & Additional Notes)
