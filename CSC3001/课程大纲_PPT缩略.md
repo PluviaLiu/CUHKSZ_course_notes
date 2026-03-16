@@ -1,95 +1,3 @@
-=== 文档 1: LN0 - Introduction.pdf ===
-
-### **离散数学 (Discrete Mathematics) 课程大纲**
-
----
-
-### **模块1: 逻辑与证明 (Topic 1: Logic and Proofs)**
-
-#### ① 定义与概念 (Definitions & Concepts)
-*   **逻辑 (Logic)**: 严谨推理的基础.
-    *   **命题逻辑 (Propositional Logic)**: 处理可判断真假的陈述句 (命题).
-    *   **一阶逻辑 (First-Order Logic)**: 引入量词 (Quantifiers, e.g., $\forall, \exists$) 和谓词 (Predicates).
-*   **证明 (Proof)**: 验证数学命题真实性的方法.
-    *   **归纳法 (Induction)**: 从基础情况 (base case) 推广到所有情况.
-    *   **反证法 (Contradiction)**: 假设命题为假, 导出矛盾.
-
-#### ② 公式与方程 (Formulas & Equations)
-*   **量词使用示例 (Quantifier Example)**:
-    $\forall x \exists y, z \quad x = y + z$
-    (对于任意x, 存在y和z, 使得x是y与z的和)
-*   **算术平均-几何平均不等式 (AM-GM Inequality)**:
-    $\frac{x_1 + x_2 + \dots + x_n}{n} \ge \sqrt[n]{x_1 \cdot x_2 \cdot \dots \cdot x_n}$ (for non-negative $x_i$)
-
-#### ④ 要点与备注 (Key Points & Additional Notes)
-*   **目标**: 学习严谨推理和基本证明技巧.
-*   **应用**: 人工智能 (AI), 数据库 (Database), 电路 (Circuit), 算法 (Algorithms).
-
----
-
-### **模块2: 数论 (Topic 2: Number Theory)**
-
-#### ① 定义与概念 (Definitions & Concepts)
-*   **整除性 (Divisibility)**: 研究整数之间相除的关系 (e.g., a|b).
-*   **密码学 (Cryptography)**: 利用数论原理 (e.g., 素数, 模运算) 进行信息加密与解密.
-
-#### ④ 要点与备注 (Key Points & Additional Notes)
-*   **目标**: 学习初等数论和经典结论.
-*   **经典问题**: 倒水问题 (Jugs Problem, e.g., 用3加仑和5加仑桶量出4加仑), 韩信点兵 (对应中国剩余定理 Chinese Remainder Theorem).
-
----
-
-### **模块3: 图论 (Topic 3: Graph Theory)**
-
-#### ① 定义与概念 (Definitions & Concepts)
-*   **图 (Graphs)**: 由顶点 (Vertices/Nodes) 和边 (Edges) 组成的结构, 用于模型化对象间的关系.
-*   **度序列 (Degree Sequence)**: 图中各顶点度的序列.
-*   **欧拉图 (Eulerian Graphs)**: 存在一条遍历所有边一次且仅一次的路径/回路的图.
-*   **同构 (Isomorphism)**: 两个图结构上完全相同 (顶点和边可一一对应).
-*   **树 (Trees)**: 无环连通图.
-*   **匹配 (Matching)**: 边的集合, 其中任意两条边不共享顶点.
-*   **着色 (Coloring)**: 为图的顶点/边/面分配颜色, 满足特定约束 (e.g., 相邻顶点不同色).
-
-#### ④ 要点与备注 (Key Points & Additional Notes)
-*   **目标**: 学习如何用图建模问题, 掌握基本概念和知识.
-*   **应用**: 计算机网络 (Computer Networks), 电路设计 (Circuit Design), 数据结构 (Data Structures), 地图着色, 考试安排, 数据传输.
-
----
-
-### **模块4: 计数 (Topic 4: Counting)**
-
-#### ① 定义与概念 (Definitions & Concepts)
-*   **集合与函数 (Sets and Functions)**: 计数的基础工具.
-*   **排列 (Permutations)**: 从n个不同元素中取出m个进行**排序**.
-*   **组合 (Combinations)**: 从n个不同元素中取出m个**不考虑顺序**.
-*   **容斥原理 (Inclusion-Exclusion Principle)**: 计算多个集合并集大小的公式.
-*   **鸽巢原理 (Pigeonhole Principle)**: n+1个物品放入n个容器, 至少有一个容器有多于1个物品.
-*   **映射计数 (Counting by Mapping)**: 通过建立一一对应关系 (双射, Bijection) 来证明两个集合大小相等.
-*   **递归 (Recursions)**: 用问题自身的更小实例来定义或解决问题.
-
-#### ④ 要点与备注 (Key Points & Additional Notes)
-*   **目标**: 学习基本概念 (集合、函数) 和基础计数技巧.
-*   **应用**: 概率论 (Probability), 数据结构 (Data Structures), 算法分析 (Algorithms, e.g., 比较冒泡排序与归并排序的复杂度).
-
----
-
-### **模块5: 常见错误与思维要点 (Common Mistakes & Key Mindset)**
-
-#### ③ 常见错误与混淆 (Common Mistakes & Confusions)
-*   **1. 集合关系**: $\emptyset \in \mathbb{R}$ (错误).
-    *   **纠正**: $\emptyset \subseteq \mathbb{R}$. 空集 ($\emptyset$) 是任何集合的**子集 (subset)**, 但它不是实数集合 ($\mathbb{R}$) 的一个**元素 (element)**.
-*   **2. 逻辑等价**: $x^2 \neq y^2 \Leftrightarrow x \neq y$ (错误).
-    *   **纠正**: $x^2 \neq y^2 \Rightarrow x \neq y$ 是正确的 (它是 $x = y \Rightarrow x^2 = y^2$ 的逆否命题). 但反向 $x \neq y \Rightarrow x^2 \neq y^2$ 不成立 (反例: $x=2, y=-2$). 因此双向蕴含 ($\Leftrightarrow$) 错误.
-*   **3. 不等式性质**: $a > b, c > d \Rightarrow ac > bd$ (错误).
-    *   **纠正**: 此结论仅在特定条件下 (e.g., $a,b,c,d$ 均为正数) 成立. 涉及负数时, 结果可能为 $>, <, =$. (反例: $1 > -2, -3 > -4 \Rightarrow 1(-3) > (-2)(-4) \Rightarrow -3 > 8$ 是错误的).
-*   **4. 整数性质**: "奇数个连续正整数之和为奇数" (错误).
-    *   **纠正**: 和可能是偶数. (反例: $1+2+3 = 6$).
-
-#### ④ 要点与备注 (Key Points & Additional Notes)
-*   **核心要点**: **保持头脑清晰 (A CLEAR MIND)**.
-*   **方法论**: **三思而后行 (Think twice for every step)**. 完成解题步骤不等于解题正确.
-
-=== 文档 2: LN1 - Propositional logic.pdf ===
 
 ### **命题逻辑 (Propositional Logic)**
 
@@ -127,34 +35,39 @@
 
 ##### ② 公式与方程 (Formulas & Equations)
 1.  **否定 (NOT / Negation):** $\neg p$ 或 $\bar{p}$
-    | $p$ | $\neg p$ |
-    |:---:|:---:|
-    | T   | F   |
-    | F   | T   |
-2.  **合取 (AND / Conjunction):** $p \land q$
-    | $p$ | $q$ | $p \land q$ |
-    |:---:|:---:|:---:|
-    | T   | T   | T   |
-    | T   | F   | F   |
-    | F   | T   | F   |
-    | F   | F   | F   |
-3.  **析取 (OR / Disjunction):** $p \lor q$
-    | $p$ | $q$ | $p \lor q$ |
-    |:---:|:---:|:---:|
-    | T   | T   | T   |
-    | T   | F   | T   |
-    | F   | T   | T   |
-    | F   | F   | F   |
-4.  **异或 (XOR / Exclusive-OR):** $p \oplus q$ (当 $p$ 和 $q$ 真值不同时为真)
-    | $p$ | $q$ | $p \oplus q$ |
-    |:---:|:---:|:---:|
-    | T   | T   | F   |
-    | T   | F   | T   |
-    | F   | T   | T   |
-    | F   | F   | F   |
-5.  **多数表决 (Majority):** $M(p, q, r)$ (当 $p, q, r$ 中至少有两个为真时为真)
 
----
+| $p$ | $\neg p$ |
+| :-: | :------: |
+|  T  |    F     |
+|  F  |    T     |
+2.  **合取 (AND / Conjunction):** $p \land q$
+
+| $p$ | $q$ | $p \land q$ |
+| :-: | :-: | :---------: |
+|  T  |  T  |      T      |
+|  T  |  F  |      F      |
+|  F  |  T  |      F      |
+|  F  |  F  |      F      |
+2.  **析取 (OR / Disjunction):** $p \lor q$
+
+| $p$ | $q$ | $p \lor q$ |
+| :-: | :-: | :--------: |
+|  T  |  T  |     T      |
+|  T  |  F  |     T      |
+|  F  |  T  |     T      |
+|  F  |  F  |     F      |
+3.  **异或 (XOR / Exclusive-OR):** $p \oplus q$ (当 $p$ 和 $q$ 真值不同时为真)
+
+| $p$ | $q$ | $p \oplus q$ |
+|:---:|:---:|:---:|
+| T   | T   | F   |
+| T   | F   | T   |
+| F   | T   | T   |
+| F   | F   | F   |
+4.  **多数表决 (Majority):** $M(p, q, r)$ (当 $p, q, r$ 中至少有两个为真时为真)
+
+
+
 
 #### **3. 从基本算子构造任意算子 (Constructing Any Operator)**
 
@@ -218,12 +131,13 @@
 
 ##### ② 公式与方程 (Formulas & Equations)
 1.  **条件语句真值表:** $p \rightarrow q$ 仅在 $p$ 为 T 且 $q$ 为 F 时为 F。
-    | $p$ | $q$ | $p \rightarrow q$ |
-    |:---:|:---:|:---:|
-    | T   | T   | T   |
-    | T   | F   | F   |
-    | F   | T   | T   |
-    | F   | F   | T   |
+
+| $p$ | $q$ | $p \rightarrow q$ |
+| :-: | :-: | :---------------: |
+|  T  |  T  |         T         |
+|  T  |  F  |         F         |
+|  F  |  T  |         T         |
+|  F  |  F  |         T         |
 2.  **等价形式 (Equivalences):**
     -   $p \rightarrow q \equiv \neg p \lor q$
     -   $p \rightarrow q \equiv \neg q \rightarrow \neg p$ (Contrapositive)
