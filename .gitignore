@@ -7,3 +7,9 @@ Copilot/
 # 忽略所有插件生成的配置文件
 *.json
 *.log
+
+
+
+
+# Ignore Smart Environment folder
+.smart-env
