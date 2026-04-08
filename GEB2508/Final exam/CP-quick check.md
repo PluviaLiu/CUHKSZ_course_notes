@@ -145,6 +145,7 @@ p7④ **要点与补充说明**
 
 #### **1.3 常见误区与混淆 (Common Mistakes & Confusions)**
 1.3.1. **内在主义 vs. 外在主义 (Internalism vs. Externalism)**
+
 | 特征 | 内在主义 (Internalism) | 外在主义 (Externalism) |
 | :--- | :--- | :--- |
 | **驱动力** | 内部逻辑、智力需求 | 外部社会、经济、政治因素 |
