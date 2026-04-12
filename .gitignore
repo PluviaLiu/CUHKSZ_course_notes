@@ -9,7 +9,8 @@ Copilot/
 *.log
 
 
-
+#忽略Tasks相关的任务管理（自己把相关文件放到此文件夹下）
+Tasks_Private/
 
 # Ignore Smart Environment folder
 .smart-env
