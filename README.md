@@ -21,7 +21,8 @@ prompt: 在copilot- command里设置。
 
 ## 🛠 插件配置
 
-### 1. PDF 批注 (插件名：Annotator)
+### 1. PDF 相关
+Annotator：
 用于对 PDF 文件进行批注。
 - **使用方法**：新建一个 Markdown 文件，并在文件头（Frontmatter）中添加以下内容：
 
@@ -30,6 +31,9 @@ prompt: 在copilot- command里设置。
 annotation-target: 附件/你的作业文件名.pdf
 ---
 ```
+Test extractor:
+用于对PDF中的文本进行提取，防止ai等工具无法读取本地PDF。
+- 使用方法：对pdf文件右上角进行提取。
 
 ### 2. 版本控制 (插件名：Terminal)
 集成终端插件，用于执行 Git 命令：
@@ -50,8 +54,10 @@ annotation-target: 附件/你的作业文件名.pdf
 
 - **插件选择**：Copilot
 - **模型配置**：Gemini
-  - *理由*：Gemini 对 LaTeX 公式（如 $...$）的渲染兼容性更好，能够直接复制到 Obsidian 中使用，避免乱码。
-- **Prompt 设置**：请在 Copilot 的 Command 设置中进行配置。
+  - *理由*：Gemini 对 LaTeX 公式（如 $...$）的渲染兼容性更好，能够直接复制到 Obsidian 中使用，避免乱码。同时，gemini支持图片询问，这样方便题目截图问ai。
+- **Prompt 设置**：请在 Copilot 的 Command 设置中进行配置。提前预设之后，只需在输入框按下“/“键，或者选中一段文字，右键选择copilot即可调用。
+个人设置包括：
+1. 做题prompt：
 
 ---
 
