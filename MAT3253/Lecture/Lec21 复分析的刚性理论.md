@@ -90,7 +90,7 @@ Morera 定理是这一性质的逆向应用，其逻辑如下：
         $$f(z) = \sum_{k=0}^{\infty} c_k (z - z_0)^k$$
     - 其中系数 $c_k = \frac{f^{(k)}(z_0)}{k!}$。
 
-- **[[零点聚点与系数的必然性 (Accumulation of Zeros and Vanishing Coefficients)]]**
+- **[[零点聚点 (Accumulation of Zeros)]]**
     
 - **结论：全纯函数的刚性 (Rigidity of Holomorphic Functions)**
     - 若全纯函数在某一点的邻域内存在零点的聚点，则该函数在该连通区域内必恒等于零。
@@ -175,7 +175,7 @@ Morera 定理是这一性质的逆向应用，其逻辑如下：
 Weierstrass 定理不仅保证了全纯函数序列在内闭一致收敛下的极限函数依然全纯，更重要的是，它允许我们对极限函数进行逐项求导。这种稳定性是后续讨论函数全局行为的基石。
 
 
-#### [[Weierstrass 极限定理 (Weierstrass Convergence Theorem)]]
+#### [[Weierstrass极限定理 (Weierstrass Convergence Theorem)]]
 
 
 ---
