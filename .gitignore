@@ -14,3 +14,10 @@ Tasks_Private/
 
 # Ignore Smart Environment folder
 .smart-env
+
+
+#忽略科研内容
+ERG2081/
+
+#忽略个人协作指南和工作流程
+Claudian协作指南.md

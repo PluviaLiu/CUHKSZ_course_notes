@@ -171,13 +171,6 @@
 
 ---
 
-#### 6. 总结与规则应用 (Summary & Rules)
-
-- **考试避坑指南：**
-    - 看到 **Identity Theorem**，第一反应是去找 **accumulation point** (聚点)。
-    - 找到聚点后，**必须检查**这个点在不在题目给定的那个括号（定义域）里。
-    - 如果聚点在边界上（比如本题的 $1$），或者在定义域外面，那么唯一性定理**失效**。
-    - **英语表达：** "The accumulation point $z=1$ lies on the **boundary** of the domain $D(0,1)$, not **inside** the domain. Therefore, the **Identity Theorem** does not apply." (聚点 $z=1$ 位于定义域的边界上，不在内部。因此，唯一性定理不适用。)
 
 # Q3
 #### 1. 题目翻译 (Translation of the Question)
@@ -244,7 +237,7 @@
 
 - **逻辑链条：**
     - **第一步：明确定理的适用范围**
-        - **因为** **Theorem 12.4.3** 讨论的是函数在 **open set** (开集) $D(0, 1)$ 上的性质，
+        - **因为** **Theorem 12.4.3** [[Weierstrass极限定理 (Weierstrass Convergence Theorem)]]讨论的是函数在 **open set** (开集) $D(0, 1)$ 上的性质，
         - **所以** 定理只关心开集内部的点，即满足 $|z| < 1$ 的点。
     - **第二步：分析局部一致收敛的定义**
         - **因为** **locally uniform convergence** 的定义只要求在区域内部的 **compact subsets** (紧子集) 上一致收敛，
