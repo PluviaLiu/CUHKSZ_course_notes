@@ -23,7 +23,7 @@
 1. 安装 Obsidian：https://obsidian.md/
 2. 克隆仓库：
    ```bash
-   git clone <your-repo-url>
+   git clone <https://github.com/PluviaLiu/CUHKSZ_course_notes>
    ```
 3. Obsidian → **打开文件夹为 vault** → 选择克隆后的文件夹。
 
@@ -40,17 +40,9 @@
 
 ## 🛠 Obsidian 配置（可选）
 
-阅读笔记不强依赖这些配置；如果你也用 Obsidian，下面设置能提升体验。
+阅读笔记不强依赖这些配置；如果你也用 Obsidian，下面设置能获得类似VScode的UI界面，与完善的AI协助体验。
 
 ### 1) PDF 相关
-- **Annotator**：对 PDF 文件批注  
-  用法：新建一个 Markdown 文件，并在 Frontmatter 中加入：
-  ```yaml
-  ---
-  annotation-target: 附件/你的作业文件名.pdf
-  ---
-  ```
-
 - **Text Extractor**：提取 PDF 文本（便于检索/AI 工具读取）  
   用法：打开 PDF → 右上角菜单 → 执行提取。
 
@@ -68,26 +60,18 @@
 ### 4) AI 辅助
 - 插件：**Copilot**
 - 模型：**Gemini**
-  - 理由：对 LaTeX 公式复制/渲染更友好，并支持图片提问（适合题目截图询问）。
+- 理由：对 LaTeX 公式复制/渲染更友好，并支持图片提问（适合题目截图询问）。
 - 用法：可在 Copilot Commands 里预设 Prompt；输入框 `/` 或选中文本右键调用。
 
 #### Claude/Claudian 支持
-- **Claudian**: 专业的 Obsidian 知识管理 AI 助手
-  - **特点**:
-    - 深度理解 Obsidian 的 Markdown、YAML frontmatter、Wiki-links 等原生语法
-    - 擅长处理"第二大脑"哲学和知识组织逻辑
-    - 支持相对路径操作，避免破坏笔记结构
-    - 优先考虑链接安全性，从不覆盖数据而不理解上下文
+- **Claudian**：将Claude code内接到Obsidian内
   - **适用场景**:
-    - 知识库整理和优化
-    - 跨课程知识点的串联分析
-    - 理论框架的深度解读
-    - Git 仓库的自动提交和推送
-  - **工作模式**: 原子化笔记管理、Wiki-links 优化、理论应用分析
+    - 批量化处理：“帮我给这一系列标题重命名为Def/Thm/Lemma等开头”
+    - 双链处理：“给我扫描这个知识库下的知识点，在知识点的地方建立双链
 
 ### 5) 任务管理
 - 插件：**Tasks**
-- 我通常在文档开头记录任务与使用日期，再在统一的任务看板汇总管理。
+- 我通常在文档开头记录任务与使用日期。之后，建立统一的任务看板，就可以纵览需要修改的文件和待整理的知识点。
 
 ## 📌 免责声明
 本仓库为个人学习记录，内容可能存在不严谨或错误之处，仅供参考；如发现问题欢迎提 issue/讨论。
