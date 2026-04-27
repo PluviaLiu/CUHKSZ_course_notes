@@ -27,6 +27,13 @@
    ```
 3. Obsidian → **打开文件夹为 vault** → 选择克隆后的文件夹。
 
+### 同步到手机端（iOS）
+1. 手机上下载Working copy软件，登陆GitHub
+2. 从 GitHub 上 pull 同步到手机端
+3. 从"文件"里把此文件夹从 Working Copy 里拖动到手机端 Obsidian 文件夹下
+   - ⚠️ **不要拖到 iCloud**，可能会出现同步问题
+3. 打开 Obsidian app 即可浏览
+
 ## 🧠 笔记方法：原子化 + 双链
 
 我的日常整理遵循“**原子化笔记**”思路：
@@ -43,8 +50,7 @@
 阅读笔记不强依赖这些配置；如果你也用 Obsidian，下面设置能获得类似VScode的UI界面，与完善的AI协助体验。
 
 ### 1) PDF 相关
-- **Text Extractor**：提取 PDF 文本（便于检索/AI 工具读取）  
-  用法：打开 PDF → 右上角菜单 → 执行提取。
+- 
 
 ### 2) 版本控制
 - **Terminal**（插件）：在 Obsidian 内执行 Git 命令
@@ -62,6 +68,8 @@
 - 模型：**Gemini**
 - 理由：对 LaTeX 公式复制/渲染更友好，并支持图片提问（适合题目截图询问）。
 - 用法：可在 Copilot Commands 里预设 Prompt；输入框 `/` 或选中文本右键调用。
+\*可以配合**Text Extractor**使用：Copilot无法直接读取本地 PDF 文本，text extractor可以轻便提出文本。
+  用法：打开 PDF → 右上角菜单 → 执行提取。
 
 #### Claude/Claudian 支持
 - **Claudian**：将Claude code内接到Obsidian内
