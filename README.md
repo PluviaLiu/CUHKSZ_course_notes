@@ -1,5 +1,5 @@
 
-# CUHK(SZ) - Liu Siyu - 课程笔记
+# CUHK(SZ) - PluviaLiu - 课程笔记
 
 本仓库是我从大二下开始的个人笔记合集，也是 **Obsidian 知识库（vault）的实时副本**。其内容以 **Markdown** 为主，主要记录个人在 CUHK(SZ) 的相关课程的课件、习题与笔记（含大量 LaTeX 公式与双链笔记结构）。
 
