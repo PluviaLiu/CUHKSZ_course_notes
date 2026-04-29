@@ -6,6 +6,10 @@ $$\int_{\Gamma_R} f(z) e^{iaz} \, dz \to 0 \quad (R \to \infty)$$
 
 其中 $\Gamma_R$ 是上半平面的半圆弧。
 
+具体的适用条件：
+z趋于无穷的时候f(z)趋于0。
+约当引理只认指数函数（三角函数等等不认）
+
 **关键技巧：** 对于含 $\sin ax$ 的积分，我们把它写成复指数 (complex exponential) 的虚部 (imaginary part)：
 
 $$\sin ax = \text{Im}(e^{iax})$$

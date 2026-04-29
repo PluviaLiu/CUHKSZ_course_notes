@@ -1,5 +1,5 @@
-'- [ ] 完成MAT3253的HW13
-
+- [x] 完成MAT3253的HW13 ✅ 2026-04-29
+- [ ] 重点回看Q7
 # Q1
 我来仔细拆解这道题目。
 
@@ -982,3 +982,151 @@ $$\boxed{\int_{-\infty}^{\infty} \frac{x\sin x}{x^2+2x+2}\,dx = \frac{\pi(\sin 1
 - ● 除以 $i$ 的技巧：$\dfrac{1}{i} = -i$，乘上去即可
 
 # Q7
+#### 1. 题目翻译与信息拆解
+
+**原题翻译：**
+
+> 第7题（Brown & Churchill 习题91.1）
+> 使用函数 $f(z) = \dfrac{e^{iaz} - e^{ibz}}{z^2}$ 以及**缩进围道 (indented contour)**，推导积分公式：
+>
+> $$\int_0^{\infty} \frac{\cos(ax) - \cos(bx)}{x^2}\,dx = \frac{\pi}{2}(b-a) \quad (a \geq 0,\, b \geq 0)$$
+>
+> 然后，借助三角恒等式 (trigonometric identity) $1 - \cos(2x) = 2\sin^2 x$，说明如何推出：
+>
+> $$\int_0^{\infty} \frac{\sin^2 x}{x^2}\,dx = \frac{\pi}{2}$$
+
+**题目给了我们什么：**
+
+- 辅助函数 (auxiliary function)：$f(z) = \dfrac{e^{iaz} - e^{ibz}}{z^2}$
+- 关键工具：**缩进围道 (indented contour)**（因为 $z=0$ 是极点，在实轴上，普通半圆围道不行）
+- 两个待证公式，第二个由第一个代入特殊值得到
+
+---
+
+#### 2. 背景概念
+
+**[[缩进围道 (Indented Contour)]]**
+
+当被积函数在**实轴上有极点 (pole on the real axis)**（这里是 $z=0$），普通半圆围道会直接穿过极点，不合法。
+
+解决方法：在 $z=0$ 处绕一个**小半圆 $\gamma_\varepsilon$**（半径 $\varepsilon$，在实轴上方），绕过去。
+
+整个围道 $C$ 由四段组成：
+
+$$C = [-R, -\varepsilon] + (-\gamma_\varepsilon) + [\varepsilon, R] + \Gamma_R$$
+
+其中：
+- $[-R,-\varepsilon]$ 和 $[\varepsilon, R]$：实轴上避开原点的两段
+- $\gamma_\varepsilon$：绕过 $z=0$ 的**小半圆弧**（逆时针方向的上半圆，但我们走的是顺时针，所以带负号）
+- $\Gamma_R$：大半圆弧
+
+**[[小半圆弧引理 (Small Semicircle Lemma)]]**
+
+若 $z=0$ 是 $f(z)$ 的**一阶极点 (simple pole)**，则当 $\varepsilon \to 0$ 时，沿小半圆**顺时针**方向的积分趋于：
+
+$$\int_{-\gamma_\varepsilon} f(z)\,dz \to -\pi i \cdot \text{Res}(f;\,0)$$
+
+（若是逆时针则是 $+\pi i \cdot \text{Res}$，顺时针差一个负号）
+
+工科理解：小半圆只"扫过"了半个圆，所以是完整留数定理 $2\pi i$ 的一半，即 $\pi i$，再加方向负号。
+
+**[[$z=0$ 处的奇点阶数判断]]**
+
+$$f(z) = \frac{e^{iaz} - e^{ibz}}{z^2}$$
+
+分子在 $z=0$ 处展开（用泰勒级数 Taylor series）：
+
+$$e^{iaz} = 1 + iaz + \frac{(iaz)^2}{2} + \cdots$$
+$$e^{ibz} = 1 + ibz + \frac{(ibz)^2}{2} + \cdots$$
+
+相减：
+
+$$e^{iaz} - e^{ibz} = i(a-b)z + \frac{-a^2+b^2}{2}z^2 + \cdots = i(a-b)z + \frac{(b^2-a^2)}{2}z^2 + \cdots$$
+
+除以 $z^2$：
+
+$$f(z) = \frac{i(a-b)}{z} + \frac{b^2-a^2}{2} + \cdots$$
+
+- ● 分子有一阶零点 (simple zero) → 除以 $z^2$ 后，$z=0$ 是**一阶极点 (simple pole)**
+- ● 留数 (residue)：$\text{Res}(f;\,0) = i(a-b)$
+
+**[[大圆弧的消失条件]]**
+
+$f(z) = \dfrac{e^{iaz}-e^{ibz}}{z^2}$，含 $e^{iaz}$ 和 $e^{ibz}$，$a,b \geq 0$，约当引理 (Jordan's Lemma) 适用，大圆弧积分趋于 $0$。
+
+---
+
+#### 3. 解题思路（逐步逻辑链条）
+
+**Step 1：确认围道结构**
+
+- ● $z=0$ 是实轴上的一阶极点 → 不能用普通围道，必须用**缩进围道 (indented contour)**
+- ● 围道 $C$ 内部**没有极点**（$z=0$ 被小半圆绕开了）→ 由柯西定理 (Cauchy's Theorem)：
+
+$$\oint_C f(z)\,dz = 0$$
+
+---
+
+**Step 2：把围道积分拆成四段**
+
+$$0 = \int_{-R}^{-\varepsilon} f(x)\,dx + \int_{-\gamma_\varepsilon} f(z)\,dz + \int_{\varepsilon}^{R} f(x)\,dx + \int_{\Gamma_R} f(z)\,dz$$
+
+- ● 大圆弧 $\Gamma_R$：由约当引理，$R\to\infty$ 时 $\to 0$
+- ● 小半圆 $-\gamma_\varepsilon$（顺时针）：由小半圆弧引理，$\varepsilon\to 0$ 时 $\to -\pi i \cdot \text{Res}(f;0) = -\pi i \cdot i(a-b) = \pi(a-b)$
+
+---
+
+**Step 3：合并实轴两段，取极限**
+
+令 $R\to\infty$，$\varepsilon\to 0$：
+
+$$0 = \int_{-\infty}^{0} f(x)\,dx + \pi(a-b) + \int_{0}^{\infty} f(x)\,dx + 0$$
+
+$$\Rightarrow \int_{-\infty}^{\infty} \frac{e^{iax}-e^{ibx}}{x^2}\,dx = -\pi(a-b) = \pi(b-a)$$
+
+---
+
+**Step 4：取实部，转化为 cos 积分**
+
+$$\frac{e^{iax}-e^{ibx}}{x^2} = \frac{(\cos ax + i\sin ax)-(\cos bx + i\sin bx)}{x^2}$$
+
+实部 (real part)：$\dfrac{\cos ax - \cos bx}{x^2}$
+
+虚部 (imaginary part)：$\dfrac{\sin ax - \sin bx}{x^2}$
+
+对 $\pi(b-a)$ 取实部（它本身是实数）：
+
+$$\int_{-\infty}^{\infty} \frac{\cos ax - \cos bx}{x^2}\,dx = \pi(b-a)$$
+
+- ● 被积函数是**偶函数 (even function)**（分子分母都是偶函数）→ 折半：
+
+$$\int_0^{\infty} \frac{\cos ax - \cos bx}{x^2}\,dx = \frac{\pi}{2}(b-a) \quad \checkmark$$
+
+---
+
+**Step 5：代入特殊值，推出第二个积分**
+
+用三角恒等式 (trigonometric identity)：$1 - \cos(2x) = 2\sin^2 x$，即：
+
+$$\cos(2x) = 1 - 2\sin^2 x \Rightarrow \frac{1 - \cos(2x)}{x^2} = \frac{2\sin^2 x}{x^2}$$
+
+在第一个公式里令 $a = 0$，$b = 2$：
+
+$$\int_0^{\infty} \frac{\cos(0) - \cos(2x)}{x^2}\,dx = \frac{\pi}{2}(2-0) = \pi$$
+
+$$\Rightarrow \int_0^{\infty} \frac{1 - \cos(2x)}{x^2}\,dx = \pi$$
+
+$$\Rightarrow \int_0^{\infty} \frac{2\sin^2 x}{x^2}\,dx = \pi$$
+
+$$\Rightarrow \boxed{\int_0^{\infty} \frac{\sin^2 x}{x^2}\,dx = \frac{\pi}{2}} \quad \checkmark$$
+
+---
+
+#### 4. 核心逻辑总结（可复用规则）
+
+- ● 极点在实轴上 → 必须用**缩进围道 (indented contour)**，小半圆绕过去
+- ● 围道内无极点 → 柯西定理：$\oint_C f(z)\,dz = 0$（注意不是留数定理！）
+- ● 小半圆顺时针 → 贡献 $-\pi i \cdot \text{Res}$（半个留数，带方向负号）
+- ● 大圆弧 → 约当引理消去
+- ● 剩下实轴两段之和 $=$ $\pi i \cdot \text{Res}$
+- ● 取实部/虚部分离 $\cos$/$\sin$ 积分，再用奇偶性折半
