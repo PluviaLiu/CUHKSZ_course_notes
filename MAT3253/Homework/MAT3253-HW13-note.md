@@ -868,6 +868,117 @@ $$\boxed{\int_{-\infty}^{\infty} \frac{x^3 \sin ax}{x^4+4}\,dx = \pi e^{-a}\cos 
 - ● 含 $e^{iaz}$ 且 $a > 0$，分母比分子高 $\geq 1$ → 用**约当引理 (Jordan's Lemma)**，弧上积分趋于零
 
 # Q6
+#### 1. 题目翻译与信息拆解
 
+**原题翻译：**
+
+> 第6题（Brown & Churchill 习题88.9）
+> 用留数 (residues) 求以下反常积分 (improper integral) 的**柯西主值 (Cauchy principal value)**：
+>
+> $$\int_{-\infty}^{\infty} \frac{x \sin x}{x^2 + 2x + 2} \, dx$$
+
+**题目给了我们什么：**
+
+- 被积函数 (integrand)：$\dfrac{x \sin x}{x^2 + 2x + 2}$
+- 积分范围：$-\infty$ 到 $\infty$
+- 要求：用留数方法求**柯西主值 (Cauchy principal value)**
+
+---
+
+#### 2. 背景概念
+
+**[[柯西主值 (Cauchy Principal Value)]]**
+
+普通的反常积分要求左右两侧**独立**趋于无穷。但柯西主值是**对称地**让两端同时趋于无穷：
+
+$$\text{P.V.} \int_{-\infty}^{\infty} f(x)\,dx = \lim_{R\to\infty} \int_{-R}^{R} f(x)\,dx$$
+
+这里我们用的就是柯西主值，所以围道取 $[-R, R]$ 加上半圆弧是合法的。
+
+**[[配方与极点定位 (Completing the Square & Pole Location)]]**
+
+分母 $x^2 + 2x + 2$ 配方 (complete the square)：
+
+$$x^2 + 2x + 2 = (x+1)^2 + 1$$
+
+令其为零：$(z+1)^2 = -1 \Rightarrow z+1 = \pm i \Rightarrow z = -1 \pm i$
+
+两个极点 (poles)：
+- $z_1 = -1 + i$（在上半平面，$\text{Im}(z) = 1 > 0$）✓
+- $z_2 = -1 - i$（在下半平面，$\text{Im}(z) = -1 < 0$）✗
+
+取上半平面围道，只用 $z_1 = -1+i$。
+
+**[[约当引理 (Jordan's Lemma)]]**
+
+含 $\sin x$ → 替换成 $e^{iz}$ 取虚部 (imaginary part)。
+
+分母次数 $2$，分子（不含 $e^{iz}$）次数 $1$，差为 $1 \geq 1$，且系数 $a = 1 > 0$ → 约当引理适用，弧上积分趋于 $0$。
+
+---
+
+#### 3. 解题思路（逐步逻辑链条）
+
+**Step 1：将 $\sin x$ 替换为复指数，转化积分**
+
+- ● $\sin x = \text{Im}(e^{ix})$ → 定义辅助函数 (auxiliary function)：
+
+$$f(z) = \frac{z e^{iz}}{z^2 + 2z + 2}$$
+
+- ● 原积分 $= \text{Im}\left(\displaystyle\int_{-\infty}^{\infty} f(x)\,dx\right)$
+
+---
+
+**Step 2：构造上半平面半圆围道，应用约当引理**
+
+- ● 封闭围道 (closed contour) $C = [-R,R] + \Gamma_R$
+- ● 由留数定理 (Residue Theorem)：
+
+$$\oint_C f(z)\,dz = 2\pi i \sum_{\text{上半平面}} \text{Res}(f; z_k)$$
+
+- ● 由约当引理 (Jordan's Lemma)，$R\to\infty$ 时 $\displaystyle\int_{\Gamma_R} f(z)\,dz \to 0$
+- ● 因此：
+
+$$\int_{-\infty}^{\infty} f(x)\,dx = 2\pi i \cdot \text{Res}(f;\, -1+i)$$
+
+---
+
+**Step 3：计算 $z_1 = -1+i$ 处的留数**
+
+用 $P/Q'$ 公式：
+
+$$\text{Res}(f;\,-1+i) = \frac{(-1+i)\,e^{i(-1+i)}}{2(-1+i)+2}$$
+
+$$\text{Res} = \frac{1}{2e}\left[(\sin 1+\cos 1) + i(\cos 1 - \sin 1)\right]$$
+
+---
+
+**Step 4：代入留数定理，取虚部**
+
+$$\int_{-\infty}^{\infty} f(x)\,dx = 2\pi i \cdot \frac{1}{2e}\left[(\sin 1+\cos 1) + i(\cos 1-\sin 1)\right]$$
+
+$$= \frac{\pi i}{e}\left[(\sin 1+\cos 1) + i(\cos 1-\sin 1)\right]$$
+
+展开（记住 $i \cdot i = -1$）：
+
+$$= \frac{\pi}{e}\left[i(\sin 1+\cos 1) + i^2(\cos 1-\sin 1)\right]$$
+
+$$= \frac{\pi}{e}\left[-(\cos 1-\sin 1) + i(\sin 1+\cos 1)\right]$$
+
+$$= \frac{\pi}{e}\left[(\sin 1-\cos 1) + i(\sin 1+\cos 1)\right]$$
+
+- ● 取虚部 (imaginary part)：
+
+$$\boxed{\int_{-\infty}^{\infty} \frac{x\sin x}{x^2+2x+2}\,dx = \frac{\pi(\sin 1 + \cos 1)}{e}}$$
+
+---
+
+#### 4. 核心逻辑总结（可复用规则）
+
+- ● 含 $\sin x$ → 换成 $e^{iz}$，最后取 $\text{Im}$
+- ● 极点不在实轴、不对称 → 先配方 (complete the square) 找极点位置
+- ● 只取**上半平面**的极点参与计算
+- ● $P/Q'$ 算留数 → 代入 $2\pi i \sum \text{Res}$ → 展开后取虚部
+- ● 除以 $i$ 的技巧：$\dfrac{1}{i} = -i$，乘上去即可
 
 # Q7
