@@ -559,7 +559,204 @@ $$\int_0^{\infty} f(x)\,dx = \frac{1}{2} \cdot \frac{\pi}{100} = \boxed{\frac{\p
 - ● 简单极点用 $P/Q'$，二阶极点用求导公式
 - ● 最终：$\displaystyle\int_0^\infty f(x)\,dx = \pi i \sum_{\text{上半平面}}\text{Res}(f;z_k)$
 # Q4
+好的，我来帮你完整拆解这道复分析 (Complex Analysis) 的积分题目。这道题要求你通过留数定理 (Residue Theorem) 推导一个实积分公式。
 
+#### 1. 题目翻译与信息点拆解
+
+**原题翻译：**
+
+问题 4（Brown & Churchill 练习 86.10）：设 $m$ 和 $n$ 是整数 (integers)，其中 $0 < m < n$。按照以下步骤推导积分公式 (integration formula)：
+
+$$\int_0^\infty \frac{x^{2m}}{x^{2n}+1} dx = \frac{\pi}{2n} \csc\left(\frac{2m+1}{2n}\pi\right)$$
+
+**(a) 证明多项式 (polynomial) $z^{2n}+1$ 位于实轴上方 (above the real axis) 的零点 (zeros) 为：**
+
+$$c_k = \exp\left(i\frac{(2k+1)\pi}{2n}\right) \quad (k=0,1,\ldots,n-1)$$
+
+**并且在实轴上没有零点 (none on that axis)。**
+
+**(b) 借助讲义中的定理 13.6.4，证明：**
+
+$$\text{Res}\left(\frac{z^{2m}}{z^{2n}+1}; c_k\right) = -\frac{1}{2n} e^{i(2k+1)\alpha} \quad (k=0,1,\ldots,n-1)$$
+
+**其中 $c_k$ 是 (a) 中找到的零点，且：**
+
+$$\alpha = \frac{2m+1}{2n}\pi$$
+
+**然后使用求和公式 (summation formula)：**
+
+$$\sum_{k=0}^{n-1} z^k = \frac{1-z^n}{1-z} \quad (z \neq 1)$$
+
+**来得到表达式：**
+
+$$2\pi i \sum_{k=0}^{n-1} \text{Res}\left(\frac{z^{2m}}{z^{2n}+1}; c_k\right) = \frac{\pi}{n\sin\alpha}$$
+
+**(c) 使用 (b) 中的最终结果来完成积分公式的推导。**
+
+---
+
+**题目给了我们什么信息：**
+
+- 给定条件：$0 < m < n$，$m, n$ 都是整数
+- 目标：证明一个实积分等于一个三角函数表达式
+- 方法：分三步走
+  - 第一步：找出复函数 $z^{2n}+1$ 在上半平面 (upper half-plane) 的所有零点
+  - 第二步：计算这些零点处的留数 (residues)，然后求和
+  - 第三步：利用留数定理把复积分转化为实积分
+
+---
+
+#### 2. 背景知识与核心概念
+
+**[[零点 (Zeros / Roots)]]**
+
+函数 $f(z)$ 的零点是指满足 $f(z) = 0$ 的复数 $z$。对于多项式 $z^{2n}+1$，我们要找所有满足 $z^{2n} = -1$ 的复数。
+
+**[[欧拉公式 (Euler's Formula)]]**
+
+$$e^{i\theta} = \cos\theta + i\sin\theta$$
+
+这是复数的极坐标表示 (polar form)。任何复数 $z$ 都可以写成 $z = re^{i\theta}$，其中 $r = |z|$ 是模 (modulus)，$\theta$ 是辐角 (argument)。
+
+**[[留数 (Residue)]]**
+
+如果函数 $f(z)$ 在点 $z_0$ 有一个简单极点 (simple pole)，那么它在该点的留数定义为：
+
+$$\text{Res}(f; z_0) = \lim_{z \to z_0} (z - z_0) f(z)$$
+
+对于形如 $f(z) = \frac{g(z)}{h(z)}$ 的函数，如果 $h(z_0) = 0$ 但 $h'(z_0) \neq 0$（即 $z_0$ 是 $h$ 的简单零点），那么：
+
+$$\text{Res}(f; z_0) = \frac{g(z_0)}{h'(z_0)}$$
+
+这就是题目中提到的"定理 13.6.4"的内容。
+
+**[[留数定理 (Residue Theorem)]]**
+
+如果 $f(z)$ 在闭合曲线 (closed contour) $C$ 内部除了有限个孤立奇点 (isolated singularities) 外处处解析 (analytic)，那么：
+
+$$\oint_C f(z) dz = 2\pi i \sum \text{Res}(f; z_k)$$
+
+其中求和是对 $C$ 内部所有奇点进行的。
+
+**[[上半平面积分技巧 (Upper Half-Plane Integration)]]**
+
+当我们要计算形如 $\int_{-\infty}^{\infty} f(x) dx$ 的实积分时，常用方法是：
+
+- 构造一个包含实轴的闭合曲线（通常是实轴加上上半平面的大半圆）
+- 利用留数定理计算闭合曲线上的积分
+- 证明半圆弧上的积分在半径趋于无穷时趋于零
+- 最后得到实积分等于 $2\pi i$ 乘以上半平面所有留数之和
+
+---
+
+#### 3. 逐步解答思路
+
+**Part (a)：找出上半平面的零点**
+这 $2n$ 个根中，==哪些在**实轴上方 (Upper Half-Plane)**？（别忘了这个条件！==
+**逻辑链条：**
+
+- ● 要找 $z^{2n} + 1 = 0$ 的解 → 即找满足 $z^{2n} = -1$ 的所有 $z$
+- ● 将 $-1$ 写成极坐标形式 (polar form) → $-1 = e^{i\pi}$
+- ● 但 $e^{i\theta}$ 有周期性 (periodicity)：$e^{i\theta} = e^{i(\theta + 2\pi k)}$ 对任意整数 $k$ 成立
+- ● 所以 $-1 = e^{i\pi} = e^{i(\pi + 2\pi k)}$ 对任意整数 $k$
+- ● 因此 $z^{2n} = e^{i(2k+1)\pi}$（这里我把 $\pi + 2\pi k$ 写成了 $(2k+1)\pi$）
+- ● 两边开 $2n$ 次方根 (take the $2n$-th root) → $z = e^{i(2k+1)\pi/(2n)}$
+- ● 由于 $e^{i\theta}$ 的周期是 $2\pi$，所以 $k$ 取 $0, 1, 2, \ldots, 2n-1$ 会给出 $2n$ 个不同的根
+- ● 但题目只要上半平面 (upper half-plane) 的根，即 $\text{Im}(z) > 0$
+- ● 对于 $z = e^{i\theta}$，有 $\text{Im}(z) = \sin\theta$
+- ● 要 $\sin\theta > 0$ → 需要 $0 < \theta < \pi$
+- ● 即 $0 < \frac{(2k+1)\pi}{2n} < \pi$ → $0 < 2k+1 < 2n$ → $k = 0, 1, \ldots, n-1$
+- ● 结论：上半平面恰好有 $n$ 个零点，它们是 $c_k = \exp\left(i\frac{(2k+1)\pi}{2n}\right)$，$k = 0, 1, \ldots, n-1$
+
+**为什么实轴上没有零点？**
+
+- ● 实轴上的点满足 $\text{Im}(z) = 0$，即 $z$ 是实数
+- ● 如果 $z$ 是实数且 $z^{2n} = -1$，那么 $z^{2n}$ 也必须是实数
+- ● 但对于实数 $z$，$z^{2n} \geq 0$（因为 $2n$ 是偶数）
+- ● 而 $-1 < 0$，矛盾
+- ● 所以实轴上没有零点
+
+---
+
+**Part (b)：计算留数并求和**
+
+**步骤 1：计算单个留数**
+
+**逻辑链条：**
+
+- 使用公式：
+
+$$\text{Res}(f; c_k) = \frac{P(c_k)}{Q'(c_k)} = \frac{c_k^{2m}}{-2n/c_k} = -\frac{c_k^{2m+1}}{2n}$$
+
+- ● 将 $c_k = e^{i(2k+1)\pi/(2n)}$ 代入：
+$$\text{Res}(f; c_k) = -\frac{1}{2n} e^{i(2k+1)\alpha}$$
+
+**步骤 2：对所有留数求和**
+
+**逻辑链条：**
+
+- 用公式：$$\sum_{k=0}^{n-1} z^k = \frac{1-z^n}{1-z}$$
+得到留数的和为：
+
+	$$\sum_{k=0}^{n-1} Res= -\frac{e^{i\alpha}}{2n}  \frac{2}{1-e^{i(2\alpha)}} = - \frac{1}{n} \frac{1}{e^{-i\alpha}-e^{i\alpha}}$$
+分母部分用三角形式化简，得：
+$$ 
+\sum_{k=0}^{n-1} Res  = \frac{1}{2nisin(\alpha)}
+$$
+代入留数公式，得：
+
+$$2\pi i \sum_{k=0}^{n-1} \text{Res}(f; c_k) = \frac{\pi}{n\sin(\alpha)}$$
+
+**Part (c)：完成实积分的推导**
+
+**逻辑链条：**
+
+- ● 考虑沿着实轴从 $-R$ 到 $R$，再沿上半平面的大半圆 $C_R$ 回到 $-R$ 的闭合曲线
+- ● 当 $R \to \infty$ 时，半圆弧上的积分趋于零（这需要用 Jordan 引理或直接估计，因为分母的次数比分子高）
+- ● 所以：
+
+$$\int_{-\infty}^{\infty} \frac{x^{2m}}{x^{2n}+1} dx = 2\pi i \sum_{k=0}^{n-1} \text{Res}(f; c_k) = \frac{\pi}{n\sin(\alpha)}$$
+
+- ● 但被积函数 $\frac{x^{2m}}{x^{2n}+1}$ 是偶函数 (even function)（因为 $2m$ 和 $2n$ 都是偶数）
+- ● 对于偶函数，有性质：$\int_{-\infty}^{\infty} f(x) dx = 2\int_0^{\infty} f(x) dx$
+- ● 所以：
+
+$$2\int_0^{\infty} \frac{x^{2m}}{x^{2n}+1} dx = \frac{\pi}{n\sin(\alpha)}$$
+
+- ● 两边除以 2：
+
+$$\int_0^{\infty} \frac{x^{2m}}{x^{2n}+1} dx = \frac{\pi}{2n\sin(\alpha)}$$
+
+- ● 代入 $\alpha = \frac{2m+1}{2n}\pi$：
+
+$$\int_0^{\infty} \frac{x^{2m}}{x^{2n}+1} dx = \frac{\pi}{2n\sin\left(\frac{2m+1}{2n}\pi\right)}$$
+
+- ● 利用三角恒等式：$\frac{1}{\sin(\theta)} = \csc(\theta)$（余割函数 (cosecant function)）
+- ● 最终得到：
+
+$$\int_0^{\infty} \frac{x^{2m}}{x^{2n}+1} dx = \frac{\pi}{2n} \csc\left(\frac{2m+1}{2n}\pi\right)$$
+
+证毕。
+
+---
+
+#### 4. 关键定理与技巧总结
+
+**使用的核心定理：**
+
+- 复数的极坐标表示 (Polar form of complex numbers)
+- 单位根的性质 (Properties of roots of unity)
+- 简单极点的留数公式 (Residue formula for simple poles)
+- 留数定理 (Residue Theorem)
+- 等比数列求和 (Geometric series summation)
+- 偶函数的对称性 (Symmetry of even functions)
+
+**考试时的关键步骤：**
+
+1. 找零点时，记得用 $-1 = e^{i(2k+1)\pi}$ 而不是 $e^{i\pi}$，这样才能找到所有根
+2. 判断简单极点时，一定要验证 $h'(z_0) \neq 0$
+3. 求和时，识别出等比数列的形式，利用公式简化
+4. 最后别忘了偶函数的对称性，从 $(-\infty, \infty)$ 转换到 $(0, \infty)$ 要除以 2
 # Q5
 
 # Q6
