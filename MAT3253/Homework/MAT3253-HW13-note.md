@@ -742,23 +742,132 @@ $$\int_0^{\infty} \frac{x^{2m}}{x^{2n}+1} dx = \frac{\pi}{2n} \csc\left(\frac{2m
 
 #### 4. 关键定理与技巧总结
 
-**使用的核心定理：**
+1. 判断简单极点时，一定要验证 $Q'(z_0) \neq 0$
+2. 求和时，识别出等比数列的形式，利用公式简化
 
-- 复数的极坐标表示 (Polar form of complex numbers)
-- 单位根的性质 (Properties of roots of unity)
-- 简单极点的留数公式 (Residue formula for simple poles)
-- 留数定理 (Residue Theorem)
-- 等比数列求和 (Geometric series summation)
-- 偶函数的对称性 (Symmetry of even functions)
-
-**考试时的关键步骤：**
-
-1. 找零点时，记得用 $-1 = e^{i(2k+1)\pi}$ 而不是 $e^{i\pi}$，这样才能找到所有根
-2. 判断简单极点时，一定要验证 $h'(z_0) \neq 0$
-3. 求和时，识别出等比数列的形式，利用公式简化
-4. 最后别忘了偶函数的对称性，从 $(-\infty, \infty)$ 转换到 $(0, \infty)$ 要除以 2
 # Q5
 
+#### 1. 题目翻译与信息拆解
+
+**原题翻译：**
+
+> 第5题（Brown & Churchill 习题88.5）
+> 用留数 (residues) 推导以下积分公式：
+>
+> $$\int_{-\infty}^{\infty} \frac{x^3 \sin ax}{x^4 + 4} \, dx = \pi e^{-a} \cos a \quad (a > 0)$$
+
+**题目给了我们什么：**
+
+- **已知条件：** $a > 0$（这个条件非常关键，后面会用到）
+- **被积函数 (integrand)：** $\dfrac{x^3 \sin ax}{x^4 + 4}$，这是一个实轴上的积分
+- **要求做什么：** 用留数方法**推导**出右边的值
+
+---
+
+#### 2. 背景概念
+
+**[[约当引理 (Jordan's Lemma)]]**
+
+当被积函数含有 $\sin ax$ 或 $\cos ax$（即三角函数 (trigonometric function)）时，**不能**直接用"分母次数比分子高 $\geq 2$"的大圆弧引理，而要用约当引理 (Jordan's Lemma)。
+
+约当引理说的是：若 $f(z) \to 0$ 当 $|z| \to \infty$（分母次数比分子至少高 1），且 $a > 0$，则：
+
+$$\int_{\Gamma_R} f(z) e^{iaz} \, dz \to 0 \quad (R \to \infty)$$
+
+其中 $\Gamma_R$ 是上半平面的半圆弧。
+
+**关键技巧：** 对于含 $\sin ax$ 的积分，我们把它写成复指数 (complex exponential) 的虚部 (imaginary part)：
+
+$$\sin ax = \text{Im}(e^{iax})$$
+
+所以：
+
+$$\int_{-\infty}^{\infty} \frac{x^3 \sin ax}{x^4+4} \, dx = \text{Im}\left(\int_{-\infty}^{\infty} \frac{x^3 e^{iax}}{x^4+4} \, dx\right)$$
+
+**[[奇点 (Singularity) 的分解]]**
+
+对 $z^4 + 4 = 0$，即 $z^4 = -4$，找出所有解：
+
+$$z^4 = 4e^{i\pi} \Rightarrow z_k = \sqrt{2} \cdot e^{i(\pi + 2k\pi)/4} = \sqrt{2} \cdot e^{i(2k+1)\pi/4}$$
+
+四个根分别为（$k = 0, 1, 2, 3$）：
+
+- $z_0 = \sqrt{2} e^{i\pi/4} = 1 + i$
+- $z_1 = \sqrt{2} e^{i3\pi/4} = -1 + i$
+- $z_2 = \sqrt{2} e^{i5\pi/4} = -1 - i$
+- $z_3 = \sqrt{2} e^{i7\pi/4} = 1 - i$
+
+**上半平面 (upper half-plane)** 的极点（$\text{Im}(z) > 0$）：
+
+$$z_0 = 1+i, \quad z_1 = -1+i$$
+
+**[[简单极点的留数公式 (P/Q' formula)]]**
+
+$$\text{Res}(f; z_0) = \frac{P(z_0)}{Q'(z_0)}$$
+
+其中 $P(z) = z^3 e^{iaz}$，$Q(z) = z^4 + 4$，$Q'(z) = 4z^3$：
+
+$$\text{Res}(f; z_k) = \frac{z_k^3 e^{iaz_k}}{4z_k^3} = \frac{e^{iaz_k}}{4}$$
+
+---
+
+#### 3. 解题思路（逐步逻辑链条）
+
+**Step 1：将实积分转化为复积分的虚部**
+
+- ● $\sin ax = \text{Im}(e^{iax})$ → 把原积分的 $\sin ax$ 替换成 $e^{iax}$，取最终结果的虚部 (imaginary part)
+- ● 则原积分 $= \text{Im}\left(\displaystyle\int_{-\infty}^{\infty} f(x)\,dx\right)$
+
+---
+
+**Step 2：构造半圆围道 (semicircular contour)，应用约当引理**
+
+- ● 取上半平面的半圆围道：实轴从 $-R$ 到 $R$，加上半圆弧 $\Gamma_R$
+- ● 分母次数 $4$，分子（不算 $e^{iaz}$）次数 $3$，差为 $1 \geq 1$，且 $a > 0$ → **约当引理 (Jordan's Lemma) 适用**
+- ● 当 $R \to \infty$：$\displaystyle\int_{\Gamma_R} f(z)\,dz \to 0$
+- ==因为弧上积分为0，所以可以通过一些方式得到实数轴上的积分==
+- ● 因此：$\displaystyle\int_{-\infty}^{\infty} f(x)\,dx = 2\pi i \sum_{\text{上半平面}} \text{Res}(f; z_k)$
+
+---
+
+**Step 3：计算两个极点处的留数**
+
+用 $\text{Res}(f; z_k) = \dfrac{e^{iaz_k}}{4}$：
+
+**在 $z_0 = 1+i$ 处：**
+ $\text{Res}(f; 1+i) = \dfrac{e^{-a}(\cos a + i\sin a)}{4}$
+
+**在 $z_1 = -1+i$ 处：**
+ $\text{Res}(f; -1+i) = \dfrac{e^{-a}(\cos a - i\sin a)}{4}$
+
+$$\sum \text{Res} = \frac{e^{-a}\cos a}{2}$$
+
+---
+
+**Step 4：代入留数定理，取虚部**
+
+$$\int_{-\infty}^{\infty} f(x)\,dx = 2\pi i \cdot \frac{e^{-a}\cos a}{2} = \pi i \, e^{-a}\cos a$$
+
+- ● 取虚部 (imaginary part)：
+
+$$\int_{-\infty}^{\infty} \frac{x^3 \sin ax}{x^4+4}\,dx = \text{Im}\left(\pi i \, e^{-a}\cos a\right) = \pi e^{-a}\cos a$$
+
+（因为 $\text{Im}(ci) = c$ 对实数 $c$ 成立）
+
+==注意，虚部是没有i的==
+
+**结论：**
+
+$$\boxed{\int_{-\infty}^{\infty} \frac{x^3 \sin ax}{x^4+4}\,dx = \pi e^{-a}\cos a} \quad \checkmark$$
+
+---
+
+#### 4. 核心逻辑总结（可复用规则）
+
+- ● ==积分含 $\sin ax$ 或 $\cos ax$ → 替换成 $e^{iax}$，最后取虚部 (Im) 或实部 (Re)==
+- ● 含 $e^{iaz}$ 且 $a > 0$，分母比分子高 $\geq 1$ → 用**约当引理 (Jordan's Lemma)**，弧上积分趋于零
+
 # Q6
+
 
 # Q7
