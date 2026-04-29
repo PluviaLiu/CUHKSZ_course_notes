@@ -617,15 +617,11 @@ $$\binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{r-k} \binom{n}{k}$$
 
 # Q7
 
-
 # Q8
-
 
 # Q9
 
-
 # Q10
-
 
 # Q11
 
