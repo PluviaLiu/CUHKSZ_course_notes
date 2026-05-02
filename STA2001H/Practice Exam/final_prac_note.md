@@ -23,18 +23,6 @@
 [[可测集(Measurable Set]]
 
 
-[[条件概率 (Conditional Probability)]]
-
-$$\mathbb{P}(A \mid B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}, \quad \mathbb{P}(B) > 0$$
-
-即"在 $B$ 已发生的前提下，$A$ 发生的概率"。
-
-[[全概率公式 (Law of Total Probability)]]
-
-若 $A_1, A_2, \ldots, A_n$ 是样本空间 $\Omega$ 的一个**划分 (partition)**（互斥且穷举），则：
-
-$$\mathbb{P}(B) = \sum_{i=1}^{n} \mathbb{P}(B \mid A_i)\,\mathbb{P}(A_i)$$
-
 [[贝叶斯定理 (Bayes' Theorem)]]
 
 $$\mathbb{P}(A_i \mid B) = \frac{\mathbb{P}(B \mid A_i)\,\mathbb{P}(A_i)}{\sum_{j=1}^{n} \mathbb{P}(B \mid A_j)\,\mathbb{P}(A_j)}$$
@@ -74,7 +62,6 @@ $$\mathbb{P}(A \cap B) = \mathbb{P}(B \mid A)\,\mathbb{P}(A)$$
 
 $$\mathbb{P}(A \mid B) = \frac{\mathbb{P}(B \mid A)\,\mathbb{P}(A)}{\mathbb{P}(B)}$$
 
-$\square$
 
 > 若需要更一般的版本（分母用全概率公式展开），将 $\mathbb{P}(B) = \mathbb{P}(B|A)\mathbb{P}(A) + \mathbb{P}(B|A^c)\mathbb{P}(A^c)$ 代入即可。
 
@@ -146,6 +133,8 @@ $$\mathbb{P}(C \mid G_{PB}) = \frac{\mathbb{P}(G_{PB} \mid C)\,\mathbb{P}(C)}{\m
 
 - 因为在这个情境下，狱长的回答对三人**完全对称**，没有包含任何关于谁被赦免的额外信息。
 - 信息量 (information) 的关键在于**狱长的策略（如何选择说哪个名字）**。当策略完全随机时，听到任何名字都不会更新概率。
+
+
 # Q2
 
 # Q3
