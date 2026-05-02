@@ -136,7 +136,170 @@ $$\mathbb{P}(C \mid G_{PB}) = \frac{\mathbb{P}(G_{PB} \mid C)\,\mathbb{P}(C)}{\m
 
 
 # Q2
+#### 1. 题目翻译
 
+**第(i)题：**
+设 $X$ 为一个离散随机变量 (discrete random variable)，其支撑集 (support) $X \subseteq \mathbb{Z}$（即取值为整数）。给出 $X$ 的期望 (expectation) 和方差 (variance) 的定义。[5分]
+
+**第(ii)题：**
+设 $X \sim Ge(p)$，即 $X$ 服从几何分布 (geometrically distributed)，$p \in (0,1)$，$X \in \{1, 2, \dots\}$。证明 $\mathbb{E}[X] = 1/p$，$\text{Var}[X] = (1-p)/p^2$。**不允许**使用矩母函数 (moment generating function) 或概率母函数 (probability generating function)。[10分]
+
+**第(iii)题：**
+某人反复参加驾驶考试。设每次通过的概率为 $p \in (0,1)$，且每次考试结果相互独立 (independent)。设 $X$ 为直到该人通过考试所需的考试次数。证明"在两次或更少的考试内通过"的概率为 $p(2-p)$。另外，求 $X$ 的期望值 $\mathbb{E}[X]$。[5分]
+
+---
+
+#### 2. 背景概念
+
+[[期望 (Expectation)]]
+
+离散随机变量 $X$ 的期望定义为：
+
+$$\mathbb{E}[X] = \sum_{x \in X} x \cdot f_X(x)$$
+
+其中 $f_X(x) = P(X = x)$ 是概率质量函数 (PMF, Probability Mass Function)。直觉：对所有可能取值，用概率加权求平均。
+
+[[方差 (Variance)]]
+
+$$\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$$
+
+等价定义：$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]$。计算时通常用前者更方便。
+
+[[几何分布 (Geometric Distribution)]]
+
+$X \sim Ge(p)$，$X \in \{1, 2, 3, \dots\}$，PMF 为：
+
+$$P(X = k) = (1-p)^{k-1} \cdot p, \quad k = 1, 2, 3, \dots$$
+
+直觉：前 $k-1$ 次都失败（概率各为 $1-p$），第 $k$ 次成功（概率 $p$）。
+
+[[等比数列求和公式 (Geometric Series)]]
+
+$$\sum_{k=0}^{\infty} r^k = \frac{1}{1-r}, \quad |r| < 1$$
+
+对其求导可得：
+
+$$\sum_{k=1}^{\infty} k \cdot r^{k-1} = \frac{1}{(1-r)^2}$$
+
+再乘以 $r$ 后再求导，可得二阶矩需要的公式：
+
+$$\sum_{k=1}^{\infty} k^2 \cdot r^{k-1} = \frac{1+r}{(1-r)^3}$$
+
+这是整道第(ii)题的核心计算工具。
+
+---
+
+#### 3. 第(i)题解答：定义期望与方差
+
+**期望的定义 (Definition of Expectation)：**
+
+$$\mathbb{E}[X] = \sum_{x \in X} x \cdot P(X = x)$$
+
+要求：该级数绝对收敛 (absolutely convergent)，即 $\sum_{x} |x| \cdot P(X=x) < \infty$。
+
+**方差的定义 (Definition of Variance)：**
+
+$$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \sum_{x \in X} (x - \mathbb{E}[X])^2 \cdot P(X=x)$$
+
+等价计算公式（考试更常用）：
+
+$$\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$$
+
+---
+
+#### 4. 第(ii)题解答：证明几何分布的期望和方差
+
+**目标：** 证明 $\mathbb{E}[X] = \dfrac{1}{p}$，$\text{Var}[X] = \dfrac{1-p}{p^2}$
+
+令 $q = 1 - p$（失败概率），则 $P(X = k) = q^{k-1} p$。
+
+---
+
+**第一步：求 $\mathbb{E}[X]$**
+
+- 由期望定义：
+
+$$\mathbb{E}[X] = \sum_{k=1}^{\infty} k \cdot P(X=k) = \sum_{k=1}^{\infty} k \cdot q^{k-1} \cdot p$$
+
+- 提出常数 $p$：
+
+$$= p \sum_{k=1}^{\infty} k \cdot q^{k-1}$$
+
+- 由等比数列求导公式 (Geometric Series derivative)，$|q| < 1$：
+
+$$\sum_{k=1}^{\infty} k \cdot q^{k-1} = \frac{1}{(1-q)^2} = \frac{1}{p^2}$$
+
+- 代入得：
+
+$$\mathbb{E}[X] = p \cdot \frac{1}{p^2} = \frac{1}{p} \quad \checkmark$$
+
+---
+
+**第二步：求 $\mathbb{E}[X^2]$（为方差做准备）**
+
+先用一个技巧：把 $k^2$ 拆成 $k(k-1) + k$，这样更容易和等比级数配合：
+
+$$\mathbb{E}[X^2] = \sum_{k=1}^{\infty} k^2 q^{k-1} p = p\sum_{k=1}^{\infty} [k(k-1) + k] q^{k-1}$$
+
+$$= p\sum_{k=1}^{\infty} k(k-1) q^{k-1} + p\sum_{k=1}^{\infty} k q^{k-1}$$
+
+第二项已经算过了，等于 $p \cdot \dfrac{1}{p^2} = \dfrac{1}{p}$。
+
+对第一项，注意 $k=1$ 时 $k(k-1)=0$，从 $k=2$ 开始求和。提出一个 $q$：
+
+$$\sum_{k=2}^{\infty} k(k-1) q^{k-1} = q \sum_{k=2}^{\infty} k(k-1) q^{k-2}$$
+
+由等比级数二阶导 (second derivative of geometric series)：
+
+$$\sum_{k=2}^{\infty} k(k-1) q^{k-2} = \frac{2}{(1-q)^3} = \frac{2}{p^3}$$
+
+所以：
+
+$$p \sum_{k=1}^{\infty} k(k-1) q^{k-1} = p \cdot q \cdot \frac{2}{p^3} = \frac{2q}{p^2}$$
+
+因此：
+
+$$\mathbb{E}[X^2] = \frac{2q}{p^2} + \frac{1}{p} = \frac{2q}{p^2} + \frac{p}{p^2} = \frac{2q + p}{p^2}$$
+
+由于 $q = 1-p$，所以 $2q + p = 2(1-p) + p = 2 - p$：
+
+$$\mathbb{E}[X^2] = \frac{2-p}{p^2}$$
+
+---
+
+**第三步：求 $\text{Var}(X)$**
+
+$$\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{2-p}{p^2} - \frac{1}{p^2} = \frac{2-p-1}{p^2} = \frac{1-p}{p^2} = \frac{q}{p^2} \quad \checkmark$$
+
+---
+
+#### 5. 第(iii)题解答：驾驶考试问题
+
+**目标①：** 证明 $P(X \leq 2) = p(2-p)$
+
+**目标②：** 求 $\mathbb{E}[X]$
+
+---
+
+**第一步：识别分布**
+
+- 每次考试独立，通过概率为 $p$ → $X \sim Ge(p)$，$X \in \{1, 2, 3, \dots\}$
+- 由几何分布 PMF：$P(X = k) = (1-p)^{k-1} p$
+
+**第二步：计算 $P(X \leq 2)$**
+
+$$P(X \leq 2) = P(X=1) + P(X=2)$$
+
+- $P(X=1)$：第1次就通过 → $p$
+- $P(X=2)$：第1次失败，第2次通过 → $(1-p) \cdot p$
+
+$$P(X \leq 2) = p + (1-p)p = p[1 + (1-p)] = p(2-p) \quad \checkmark$$
+
+**第三步：求 $\mathbb{E}[X]$**
+
+由第(ii)题已证结论，$X \sim Ge(p)$ 的期望为：
+
+$$\mathbb{E}[X] = \frac{1}{p}$$
 # Q3
 
 # Q4

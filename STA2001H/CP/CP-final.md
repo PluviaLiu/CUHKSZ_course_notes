@@ -1,4 +1,4 @@
-- [ ] 完成STA2001H-cp前三章缩略，保证双面内能写下
+
 ## 知识概要
 ### **1. 概率导论 (Introduction to Probability)**
 
