@@ -24,6 +24,8 @@
    git clone <https://github.com/PluviaLiu/CUHKSZ_course_notes>
    ```
 3. Obsidian → **打开文件夹为 vault** → 选择克隆后的文件夹。
+*媒体文件较大，克隆时注意网络*
+
 
 ### 同步到手机端（iOS）
 1. 手机上下载 Working Copy 软件，登录 GitHub
@@ -35,6 +37,14 @@
 ## 🛠 Obsidian 配置（可选）
 
 阅读笔记不强依赖这些配置；如果你也用 Obsidian，下面设置能获得类似 VSCode 的 UI 界面，与完善的 AI 协助体验。
+
+### 快捷键
+
+| 功能        | 快捷键         |
+| --------- | ----------- |
+| 在打开的文件内搜索 | CMD+F       |
+| 在整个库中搜索   | CMD+shift+F |
+*windows/linux：将CMD改成ctrl即可运行*
 
 ### 版本控制/终端操作
 - **Terminal**（插件）：在 Obsidian 内执行 Git 命令
