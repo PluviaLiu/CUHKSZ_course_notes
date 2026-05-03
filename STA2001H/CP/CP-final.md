@@ -16,6 +16,7 @@
     * 离散型：$\forall x, y, P(X=x, Y=y) = P(X=x)P(Y=y)$
     - 连续型：$\forall x, y, f_{X,Y}(x,y) = f_X(x)f_Y(y)$
     - 通用CDF：$\forall x, y, F_{X,Y}(x,y) = F_X(x)F_Y(y)$
+    - 用PDF表达：$f(x,y) = f_X(x) \cdot f_Y(y)$，对所有 $(x,y)$ 成立
 4.  **划分 (Partition):** 集合族 $\{B_i\}$ 是 $\Omega$ 的划分, 若 $B_i$ 互斥 ($B_i \cap B_j = \emptyset, \forall i \neq j$) 且 $\bigcup_i B_i = \Omega$.
 
 #### **② 公式与定理 (Formulas & Theorems)**

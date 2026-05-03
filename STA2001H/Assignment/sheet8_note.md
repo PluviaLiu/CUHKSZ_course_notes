@@ -200,7 +200,7 @@ $$f(x,y) = cxy(1-x-y), \quad (x,y) \in Z$$
 
 #### 2. 背景知识与基本概念
 
-##### 2.1 [[联合概率密度函数（Joint PDF）]]
+##### 2.1 [[联合概率密度函数（Joint CDF-PDF）]]
 
 **定义（Definition）：**
 - 对于两个连续随机变量（continuous random variables）X 和 Y
