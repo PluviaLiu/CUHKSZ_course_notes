@@ -1,4 +1,4 @@
-- [ ] 完成STA2001H期末模拟卷
+- [ ] 手动写一遍STA2001H期末卷
 
 # Q1
 
@@ -498,4 +498,295 @@ $$\int_0^1 2y^2(1-y)\,dy = 2\int_0^1 (y^2 - y^3)\,dy = 2\left[\frac{y^3}{3} - \f
 $$\boxed{\mathbb{P}((X,Y) \in A) = \frac{1}{6}}$$
 # Q4
 
+#### 1. 题目翻译
 
+设 $X_1, X_2, \dots$ 为一列**独立同分布 (i.i.d., independent and identically distributed)** 的实值连续型随机变量，其**累积分布函数 (CDF, Cumulative Distribution Function)** 为 $F(x)$。
+
+**(i)** 求 $Y_n = \max\{X_1, \dots, X_n\}$ 和 $Z_n = \min\{X_1, \dots, X_n\}$ 的 CDF。【6分】
+
+**(ii)** 设 $X$ 为一实值随机变量。给出"$X_n$ **依分布收敛 (converges in distribution)** 到 $X$"的定义。【4分】
+
+**(iii)** 设 $U_n = Y_n - \log(n)$，且对 $x \in \mathbb{R}$，$F(x) = 1/(1+e^{-x})$。求 $U_n$ 的极限分布 (limiting distribution)。你必须验证该极限确实是一个 CDF。【6分】
+
+**(iv)** 设 $V_n = nZ_n$，且对 $x \in \mathbb{R}^+$，$F(x) = 1 - e^{-x}$。求 $V_n$ 的极限分布。你必须验证该极限确实是一个 CDF。【4分】
+
+---
+
+**题目信息点拆解：**
+- 给了：$n$ 个 i.i.d. 连续随机变量，公共 CDF 为 $F(x)$
+- (i) 要我们对最大值和最小值分别推导 CDF
+- (ii) 要我们给出依分布收敛的定义
+- (iii)(iv) 给了具体的 $F(x)$，做变量变换后求极限 CDF，并验证合法性
+
+---
+
+#### 2. 背景概念
+[[独立同分布((i.i.d., independent and identically distributed))]]
+
+[[次序统计量 (Order Statistics)]]
+
+$Y_n = \max\{X_1,\dots,X_n\}$ 是第 $n$ 个次序统计量（最大值），$Z_n = \min\{X_1,\dots,X_n\}$ 是第 $1$ 个次序统计量（最小值）。
+
+核心技巧：利用**独立性**把联合事件转化为乘积。
+
+$$\mathbb{P}(Y_n \leq x) = \mathbb{P}(X_1 \leq x, X_2 \leq x, \dots, X_n \leq x) \overset{\text{i.i.d.}}{=} [F(x)]^n$$
+
+$$\mathbb{P}(Z_n \leq x) = 1 - \mathbb{P}(Z_n > x) = 1 - \mathbb{P}(X_1 > x, \dots, X_n > x) \overset{\text{i.i.d.}}{=} 1 - [1-F(x)]^n$$
+
+[[依分布收敛 (Convergence in Distribution)]]
+
+称随机变量序列 $X_n$ **依分布收敛**到 $X$（记作 $X_n \xrightarrow{d} X$），若对 $F_X$ 的每一个**连续点 (continuity point)** $x$：
+
+$$\lim_{n\to\infty} F_{X_n}(x) = F_X(x)$$
+
+其中 $F_{X_n}$ 是 $X_n$ 的 CDF，$F_X$ 是 $X$ 的 CDF。
+
+[[CDF 的合法性验证 (Valid CDF Conditions)]]
+
+一个函数 $G(x)$ 是合法的 CDF，当且仅当：
+1. **单调不减 (non-decreasing)**
+2. **右连续 (right-continuous)**
+3. $\lim_{x\to-\infty} G(x) = 0$，$\lim_{x\to+\infty} G(x) = 1$
+
+[[Logistic 分布 (Logistic Distribution)]]
+
+CDF 为 $F(x) = \dfrac{1}{1+e^{-x}}$，这是 Logistic 分布（也叫 sigmoid 函数），定义在 $\mathbb{R}$ 上。
+
+[[Gumbel 分布 (Gumbel Distribution)]]
+
+CDF 为 $G(x) = e^{-e^{-x}}$，定义在 $\mathbb{R}$ 上，是极值理论中最大值的极限分布。
+
+[[指数分布 (Exponential Distribution)]]
+
+CDF 为 $F(x) = 1 - e^{-x}$，$x > 0$，是最小值极限分布的常见形式。
+
+---
+
+#### 3. 解答
+
+---
+
+##### 第(i)题：求 $Y_n$ 和 $Z_n$ 的 CDF
+
+**逻辑链条（最大值 $Y_n$）：**
+
+● "$Y_n \leq x$"最大值小于这个值， 等价于"所有 $X_i$ 都 $\leq x$"
+$$\mathbb{P}(Y_n \leq x) = \mathbb{P}(X_1 \leq x, \dots, X_n \leq x)$$
+
+↓ 由**独立性 (independence)**，联合概率等于各自概率之积
+
+$$= \mathbb{P}(X_1 \leq x) \cdot \mathbb{P}(X_2 \leq x) \cdots \mathbb{P}(X_n \leq x)$$
+
+↓ 由**同分布 (identical distribution)**，每个因子都等于 $F(x)$
+
+$$\boxed{F_{Y_n}(x) = [F(x)]^n}$$
+
+---
+
+**逻辑链条（最小值 $Z_n$）：**
+
+● "$Z_n \leq x$"的对立事件是"所有 $X_i$ 都 $> x$"
+$$\mathbb{P}(Z_n \leq x) = 1 - \mathbb{P}(Z_n > x) = 1 - \mathbb{P}(X_1 > x, \dots, X_n > x) = 1 - \prod_{i=1}^n \mathbb{P}(X_i > x) = 1 - [1 - F(x)]^n$$
+$$\boxed{F_{Z_n}(x) = 1 - [1-F(x)]^n}$$
+
+---
+
+##### 第(ii)题：依分布收敛的定义
+
+称 $X_n$ **依分布收敛 (converges in distribution)** 到随机变量 $X$，记作 $X_n \xrightarrow{d} X$，若：
+
+对 $F_X$ 的所有**连续点 (continuity point)** $x$，有：
+
+$$\lim_{n \to \infty} F_{X_n}(x) = F_X(x)$$
+
+---
+
+##### 第(iii)题：求 $U_n = Y_n - \log(n)$ 的极限分布，$F(x) = \frac{1}{1+e^{-x}}$
+
+#### 1. 题目翻译与拆解
+
+**题目：**
+设 $U_n = Y_n - \log(n)$，且对 $x \in \mathbb{R}$，原始分布的 CDF 为 $F(x) = \frac{1}{1+e^{-x}}$。
+求 $U_n$ 的**极限分布 (limiting distribution)**。你必须验证该极限确实是一个合法的 CDF。
+
+**题目给了我们什么零件？**
+1.  **零件 A（来自第一题的结论）：** 最大值 $Y_n$ 的 CDF 是 $F_{Y_n}(y) = [F(y)]^n$。
+2.  **零件 B（变量关系）：** $U_n = Y_n - \log(n)$。
+3.  **零件 C（具体的原始分布）：** $F(x) = \frac{1}{1+e^{-x}}$。
+
+**我们的目标是什么？**
+求当 $n \to \infty$ 时，$U_n$ 的 CDF 长什么样。也就是求 $\lim_{n\to\infty} \mathbb{P}(U_n \leq x)$。
+
+---
+
+#### 2. 背景概念
+
+[[累积分布函数 (CDF, Cumulative Distribution Function)]]
+CDF 的定义永远是：**“这个随机变量 $\leq x$ 的概率”**。
+所以求 $U_n$ 的 CDF，就是求 $\mathbb{P}(U_n \leq x)$。
+
+[[变量代换 (Change of Variables)]]
+当我们知道 $Y_n$ 的信息，却要求 $U_n$ 的信息时，核心动作是**“解方程”**。把未知的东西（$U_n$）替换成已知的东西（$Y_n$）。
+
+[[重要极限 (Standard Limit)]]
+微积分里的一个死公式，专门用来处理带 $n$ 次方的极限：
+$$\lim_{n\to\infty} \left(1 + \frac{a}{n}\right)^n = e^a$$
+（只要看到括号里是 $1 + \frac{\text{常数}}{n}$，外面是 $n$ 次方，直接套这个公式变成 $e^{\text{常数}}$）。
+
+---
+
+#### 3. 逻辑链条拆解（核心推导）
+
+我们一步步来，绝不跳步。
+
+**第一步：把 $U_n$ 的问题，转化成 $Y_n$ 的问题**
+● 目标是求 $U_n$ 的 CDF：
+$$F_{U_n}(x) = \mathbb{P}(U_n \leq x)$$
+↓ 因为题目给了 $U_n = Y_n - \log(n)$，代入进去：
+$$= \mathbb{P}(Y_n - \log n \leq x)$$
+↓ 这是一个不等式，我们把 $-\log n$ 移到右边（就像解 $y - 2 \leq x \implies y \leq x + 2$ 一样）：
+$$= \mathbb{P}(Y_n \leq x + \log n)$$
+
+**第二步：套用第一题的结论**
+● 我们在第 (i) 题已经证明了，最大值 $\leq$ 某个东西的概率，等于原始 $F$ 的 $n$ 次方：$\mathbb{P}(Y_n \leq \text{框框}) = [F(\text{框框})]^n$。
+↓ 现在的“框框”是 $x + \log n$，所以：
+$$F_{U_n}(x) = [F(x + \log n)]^n$$
+
+**第三步：代入具体的 $F(x)$ 公式（代数变形开始）**
+● 题目给了 $F(x) = \frac{1}{1+e^{-x}}$。
+↓ 把里面的 $x$ 替换成 $x + \log n$：
+$$F(x + \log n) = \frac{1}{1 + e^{-(x + \log n)}}$$
+↓ 利用高中的指数分配律 $-(A+B) = -A - B$：
+$$= \frac{1}{1 + e^{-x - \log n}}$$
+↓ 利用高中的指数拆分律 $e^{A+B} = e^A \cdot e^B$：
+$$= \frac{1}{1 + e^{-x} \cdot e^{-\log n}}$$
+$$F(x + \log n) = \frac{1}{1 + e^{-x} \cdot \frac{1}{n}} = \frac{1}{1 + \frac{e^{-x}}{n}}$$
+
+**第五步：加上外面的 $n$ 次方，求极限**
+● 回到第二步，我们要求的是 $[F(x + \log n)]^n$：
+$$F_{U_n}(x) = \left( \frac{1}{1 + \frac{e^{-x}}{n}} \right)^n$$
+↓ 分子 $1^n$ 还是 $1$，分母加上 $n$ 次方：
+$$= \frac{1}{\left(1 + \frac{e^{-x}}{n}\right)^n}$$
+↓ 现在让 $n \to \infty$。观察分母，它完美符合我们前面说的 [[重要极限 (Standard Limit)]]：$\lim \left(1 + \frac{a}{n}\right)^n = e^a$。
+↓ 这里的 $a$ 就是 $e^{-x}$。所以分母的极限变成了 $e^{e^{-x}}$。
+↓ 最终结果：
+$$\lim_{n\to\infty} F_{U_n}(x) = \frac{1}{e^{e^{-x}}} = e^{-e^{-x}}$$
+
+这就是 Gumbel 分布的 CDF！
+
+---
+
+#### 4. 验证它是合法的 CDF
+[[如何验证CDF]]
+
+题目要求验证这个结果 $G(x) = e^{-e^{-x}}$ 是合法的 CDF。必须满足三个条件：
+
+**① 验证左极限（趋向 $-\infty$ 时等于 0）：**
+● 当 $x \to -\infty$ 时，$-x \to +\infty$。
+↓ 所以 $e^{-x} \to +\infty$。
+↓ 那么 $e^{-e^{-x}}$ 就变成了 $e^{-\infty}$，结果是 $0$。✓
+
+**② 验证右极限（趋向 $+\infty$ 时等于 1）：**
+● 当 $x \to +\infty$ 时，$-x \to -\infty$。
+↓ 所以 $e^{-x} \to 0$。
+↓ 那么 $e^{-e^{-x}}$ 就变成了 $e^0$，结果是 $1$。✓
+
+**③ 验证单调不减 (Non-decreasing)：**
+● 对 $G(x)$ 求导数（用链式法则）：
+$$G'(x) = e^{-e^{-x}} \cdot \frac{d}{dx}(-e^{-x}) = e^{-e^{-x}} \cdot (e^{-x}) > 0$$
+↓ 导数永远大于 0，说明函数一直在往上走，单调不减。✓
+
+**结论：** 验证完毕，这是一个合法的 CDF。
+
+##### 第(iv)题：求 $V_n = nZ_n$ 的极限分布，$F(x) = 1 - e^{-x}$，$x \in \mathbb{R}^+$
+没问题，最后一道题（第 iv 题）其实比第三题要简单得多，因为它**不需要用到那个复杂的极限公式**，它的 $n$ 在中途直接被完美抵消掉了！
+
+我们继续用工科拆解的思维，一步一步把这道题拆开。
+
+---
+
+#### 1. 题目翻译与信息拆解
+
+**题目：**
+设 $V_n = nZ_n$，且对 $x \in \mathbb{R}^+$（即 $x > 0$），原始分布的 CDF 为 $F(x) = 1 - e^{-x}$。
+求 $V_n$ 的**极限分布 (limiting distribution)**。你必须验证该极限确实是一个合法的 CDF。
+
+**题目给了我们什么零件？**
+1.  **零件 A（来自第一题的结论）：** 最小值 $Z_n$ 的 CDF 是 $F_{Z_n}(z) = 1 - [1 - F(z)]^n$。
+2.  **零件 B（变量关系）：** $V_n = nZ_n$。（注意：第三题是减法平移，这里是乘法缩放）。
+3.  **零件 C（具体的原始分布）：** $F(x) = 1 - e^{-x}$。
+
+**我们的目标是什么？**
+求当 $n \to \infty$ 时，$V_n$ 的 CDF 长什么样，也就是求 $\lim_{n\to\infty} \mathbb{P}(V_n \leq x)$。
+
+---
+
+#### 2. 背景概念
+
+[[累积分布函数 (CDF, Cumulative Distribution Function)]]
+老规矩，求 $V_n$ 的 CDF，就是求 $\mathbb{P}(V_n \leq x)$。
+
+[[变量代换 (Change of Variables)]]
+已知 $Z_n$ 求 $V_n$，核心动作依然是“解方程”。把 $V_n$ 替换成 $Z_n$。
+
+[[指数分布 (Exponential Distribution)]]
+题目给的 $F(x) = 1 - e^{-x}$ 就是参数为 1 的指数分布。
+
+---
+
+#### 3. 逻辑链条拆解（核心推导）
+
+**第一步：把 $V_n$ 的问题，转化成 $Z_n$ 的问题**
+● 目标是求 $V_n$ 的 CDF：
+$$F_{V_n}(x) = \mathbb{P}(V_n \leq x)$$
+↓ 因为题目给了 $V_n = nZ_n$，代入进去：
+$$= \mathbb{P}(nZ_n \leq x)$$
+↓ 这是一个不等式，我们把 $n$ 除到右边去（因为 $n$ 是正数，不等号方向不变）：
+$$= \mathbb{P}\left(Z_n \leq \frac{x}{n}\right)$$
+
+**第二步：套用第一题的结论**
+● 我们在第 (i) 题已经证明了，最小值 $\leq$ 某个东西的概率公式是：$\mathbb{P}(Z_n \leq \text{框框}) = 1 - [1 - F(\text{框框})]^n$。
+↓ 现在的“框框”是 $\frac{x}{n}$，所以：
+$$F_{V_n}(x) = 1 - \left[1 - F\left(\frac{x}{n}\right)\right]^n$$
+
+**第三步：代入具体的 $F(x)$ 公式**
+● 题目给了 $F(x) = 1 - e^{-x}$。
+↓ 把里面的 $x$ 替换成 $\frac{x}{n}$：
+$$F\left(\frac{x}{n}\right) = 1 - e^{-\frac{x}{n}}$$
+↓ 把这个结果代回第二步的中括号里：
+$$1 - F\left(\frac{x}{n}\right) = 1 - \left(1 - e^{-\frac{x}{n}}\right)$$
+↓ 括号拆开，$1 - 1$ 抵消了，只剩下：
+$$= e^{-\frac{x}{n}}$$
+
+**第四步：加上外面的 $n$ 次方，求极限**
+● 回到第二步的完整公式，把中括号里的东西替换掉：
+$$F_{V_n}(x) = 1 - \left( e^{-\frac{x}{n}} \right)^n$$
+↓ 利用高中的指数乘法法则 $(a^b)^c = a^{b \cdot c}$，这里的指数是 $-\frac{x}{n} \cdot n$：
+$$-\frac{x}{n} \cdot n = -x$$
+↓ 所以 $n$ 被完美约掉了！式子变成了：
+$$F_{V_n}(x) = 1 - e^{-x}$$
+↓ 因为式子里已经没有 $n$ 了，所以当 $n \to \infty$ 时，极限就是它本身：
+$$\lim_{n\to\infty} F_{V_n}(x) = 1 - e^{-x}$$
+
+**结论：** $V_n$ 的极限分布依然是 $1 - e^{-x}$（也就是指数分布）。
+
+---
+
+#### 4. 验证它是合法的 CDF
+
+题目要求验证 $G(x) = 1 - e^{-x}$（注意题目说了 $x > 0$）是合法的 CDF。
+
+**① 验证左极限（因为 $x>0$，所以看趋向 $0$ 时是否等于 0）：**
+● 当 $x \to 0^+$ 时，$e^{-x} \to e^0 = 1$。
+↓ 所以 $G(0) = 1 - 1 = 0$。✓
+
+**② 验证右极限（趋向 $+\infty$ 时等于 1）：**
+● 当 $x \to +\infty$ 时，$e^{-x} \to 0$。
+↓ 所以 $G(+\infty) = 1 - 0 = 1$。✓
+
+**③ 验证单调不减 (Non-decreasing)：**
+● 对 $G(x)$ 求导数：
+$$G'(x) = 0 - (-e^{-x}) = e^{-x}$$
+↓ 因为指数函数 $e^{-x}$ 永远大于 0，说明导数大于 0，函数一直在往上走，单调不减。✓
+
+**结论：** 验证完毕，这是一个合法的 CDF。
