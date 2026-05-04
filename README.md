@@ -45,6 +45,7 @@
 | 在打开的文件内搜索 | CMD+F       |
 | 在整个库中搜索   | CMD+shift+F |
 *windows/linux：将CMD改成ctrl即可运行*
+*配合设置-编辑器-vim模式使用更佳*
 
 ### 版本控制/终端操作
 - **Terminal**（插件）：在 Obsidian 内执行 Git 命令
