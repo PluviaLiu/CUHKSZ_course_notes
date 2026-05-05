@@ -65,4 +65,15 @@
 | **怎么拉回来** | 减 $\mu$，再除以 $\sigma/\sqrt{n}$（CLT方法） | 减 $\log n$ | 乘以 $n$ |
 | **极限分布** | $N(0,1)$ | Gumbel，$e^{-e^{-x}}$ | 指数分布 |
 
-#### 
+#### 6️⃣导数速查表
+
+| 函数 $f(x)$  | 导数 $f'(x)$           | 函数 $f(x)$   | 导数 $f'(x)$                | 函数 $f(x)$   | 导数 $f'(x)$                 |
+| ---------- | -------------------- | ----------- | ------------------------- | ----------- | -------------------------- |
+| $x^n$      | $nx^{n-1}$           | $\sin x$    | $\cos x$                  | $\cos x$    | $-\sin x$                  |
+| $e^x$      | $e^x$                | $\tan x$    | $\sec^2 x$                | $\cot x$    | $-\csc^2 x$                |
+| $a^x$      | $a^x \ln a$          | $\sec x$    | $\sec x \tan x$           | $\csc x$    | $-\csc x \cot x$           |
+| $\ln x$    | $\dfrac{1}{x}$       | $\arcsin x$ | $\dfrac{1}{\sqrt{1-x^2}}$ | $\arccos x$ | $-\dfrac{1}{\sqrt{1-x^2}}$ |
+| $\log_a x$ | $\dfrac{1}{x \ln a}$ | $\arctan x$ | $\dfrac{1}{1+x^2}$        | $\text{arccot } x$ | $-\dfrac{1}{1+x^2}$        |
+| $\sqrt{x}$ | $\dfrac{1}{2\sqrt{x}}$ | $\dfrac{1}{x}$ | $-\dfrac{1}{x^2}$ | $e^{ax}$ | $ae^{ax}$ |
+| $\ln(ax)$ | $\dfrac{1}{x}$ | $x\ln x$ | $\ln x + 1$ | $(ax+b)^n$ | $na(ax+b)^{n-1}$ |
+| $\dfrac{1}{ax+b}$ | $-\dfrac{a}{(ax+b)^2}$ | $\sin(ax)$ | $a\cos(ax)$ | $\cos(ax)$ | $-a\sin(ax)$ |
