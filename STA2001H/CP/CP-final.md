@@ -166,20 +166,29 @@
     *   **离散:** $E[Y|X=x] = \sum_y y \cdot f(y|x)$。
     *   **连续:** $E[Y|X=x] = \int_{-\infty}^\infty y \cdot f(y|x) dy$。
     *   ⚠️ **注意**: 积分里用的是**条件 PDF** $f(y|x)$，不是联合 PDF $f(x,y)$。
-3.  **全期望公式 (Law of Total Expectation):** $E[Y] = E[E[Y|X]]$。
+3.  **区域概率计算 (Probability over Regions):**
+    *   对于连续型随机变量，计算 $P(X \in A, Y \in B)$ 需要在对应区域上积分：
+        $$P((X,Y) \in D) = \iint_D f(x,y) \, dx \, dy$$
+    *   **常见情况**：
+        *   $P(X > Y) = \int_{-\infty}^{\infty} \int_{y}^{\infty} f(x,y) \, dx \, dy = \int_{-\infty}^{\infty} \int_{-\infty}^{x} f(x,y) \, dy \, dx$
+        *   $P(X + Y \le c) = \iint_{x+y \le c} f(x,y) \, dx \, dy$
+        *   $P(X < Y < X+a) = \int_{-\infty}^{\infty} \int_{x}^{x+a} f(x,y) \, dy \, dx$
+    *   💡 **技巧**: 画出区域 $D$ 在 $(x,y)$ 平面上的图形，确定积分上下限的相互依赖关系。
+    *   💡 **对称性**: 若 $X, Y$ 独立同分布且连续，则 $P(X > Y) = P(Y > X) = \frac{1}{2}$ (因为 $P(X=Y)=0$)。
+4.  **全期望公式 (Law of Total Expectation):** $E[Y] = E[E[Y|X]]$。
     *   **Taking out what is known**: $E[g(X)Y | X] = g(X) E[Y|X]$。
     *   *直观理解*：在已知 $X$ 的条件下，$g(X)$ 就像一个常数，可以提到期望符号外面。
-4.  **条件方差公式 (Law of Total Variance):** $Var(Y) = E[Var(Y|X)] + Var(E[Y|X])$。
-5.  **随机变量函数转换 (Change of Variables):**
+5.  **条件方差公式 (Law of Total Variance):** $Var(Y) = E[Var(Y|X)] + Var(E[Y|X])$。
+6.  **随机变量函数转换 (Change of Variables):**
     *   **一维:** $Y=g(X)$, $f_Y(y) = f_X(g^{-1}(y)) |\frac{d}{dy}g^{-1}(y)|$。
     *   **多维:** $(Y_1, Y_2) = T(X_1, X_2)$, $g(y_1, y_2) = f(T^{-1}(y_1, y_2)) |J|$。其中 $J$ 是 $T^{-1}$ 变换的雅可比行列式 (Jacobian) 的绝对值。
-6.  **顺序统计量 PDF:** $X_{(j)}$ 的 PDF 为 $f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!} f(x) [F(x)]^{j-1} [1-F(x)]^{n-j}$。
-7.  **泊松过程与指数分布:** 泊松过程的事件间隔时间服从独立的指数分布，参数为 $\lambda$。
-8.  **正态相关分布 (Distributions related to Normal):**
+7.  **顺序统计量 PDF:** $X_{(j)}$ 的 PDF 为 $f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!} f(x) [F(x)]^{j-1} [1-F(x)]^{n-j}$。
+8.  **泊松过程与指数分布:** 泊松过程的事件间隔时间服从独立的指数分布，参数为 $\lambda$。
+9.  **正态相关分布 (Distributions related to Normal):**
     *   若 $Z_i \stackrel{i.i.d.}{\sim} N(0,1)$, 则 $\sum_{i=1}^n Z_i^2 \sim \chi_n^2$ (卡方分布 Chi-squared)。
     *   若 $Z \sim N(0,1), Y \sim \chi_n^2$ 且独立, 则 $\frac{Z}{\sqrt{Y/n}} \sim t_n$ (t-分布)。
     *   若 $X \sim \chi_{d_1}^2, Y \sim \chi_{d_2}^2$ 且独立, 则 $\frac{X/d_1}{Y/d_2} \sim F_{d_1, d_2}$ (F-分布)。
-9.  **随机项数之和 (Compound Distribution / Random Sums):**
+10.  **随机项数之和 (Compound Distribution / Random Sums):**
     *   设 $Z = X_1 + X_2 + \dots + X_N$，其中 $N$ 是随机变量，$X_i$ 是 i.i.d. 且独立于 $N$。
     *   **PGF 复合公式**: $G_Z(s) = G_N(G_X(s))$ （记忆法：$N$ 在外面，因为 $N$ 决定了层数）
     *   **MGF 复合公式**: $M_Z(t) = G_N(M_X(t))$ 或 $M_N(\ln M_X(t))$
