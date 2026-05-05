@@ -1,7 +1,7 @@
 
-### **1. 概率导论 (Introduction to Probability)**
+### 1. 概率导论 (Introduction to Probability)
 
-#### **① 定义与概念 (Definitions & Concepts)**
+#### ① 定义与概念 (Definitions & Concepts)
 1.  **概率三元组 (Probability Triple):** $(\Omega, \mathcal{F}, \mathbb{P})$
     *   **样本空间 (Sample Space) $\Omega$**: 所有可能结果的集合.
     *   **事件集合 ($\sigma$-algebra) $\mathcal{F}$**: $\Omega$ 的子集构成的集合, 满足: (i) $\emptyset \in \mathcal{F}$, (ii) 若 $A \in \mathcal{F}$ 则 $A^c \in \mathcal{F}$, (iii) 若 $A_1, A_2, \dots \in \mathcal{F}$ 则 $\bigcup_i A_i \in \mathcal{F}$.
@@ -18,7 +18,7 @@
     - 用PDF表达：$f(x,y) = f_X(x) \cdot f_Y(y)$，对所有 $(x,y)$ 成立
 4.  **划分 (Partition):** 集合族 $\{B_i\}$ 是 $\Omega$ 的划分, 若 $B_i$ 互斥 ($B_i \cap B_j = \emptyset, \forall i \neq j$) 且 $\bigcup_i B_i = \Omega$.
 5. 考试公式先写：$Consider probability space (Ω, F , P) and let A, B ∈ F with P(A), P(B) > 0.$
-#### **② 公式与定理 (Formulas & Theorems)**
+#### ② 公式与定理 (Formulas & Theorems)
 1.  **计数 (Counting):** 排列 (Permutation) $P(n,k) = \frac{n!}{(n-k)!}$, 组合 (Combinatic lion) $C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$.
 2.  **基本性质 (Properties):**
     *   $P(A^c) = 1 - P(A)$.
@@ -32,16 +32,16 @@
 4.  **赌徒破产问题 (Gambler's Ruin):** 初始资金 $i$, 目标 $N$, 赢率 $p$. 最终获胜概率 $P_i$:
     $P_i = \begin{cases} \frac{i}{N} & \text{if } p = 1/2 \\ \frac{1 - ((1-p)/p)^i}{1 - ((1-p)/p)^N} & \text{if } p \neq 1/2 \end{cases}$
 
-#### **③ ⚠️ 常见错误与混淆 (Common Mistakes & Confusions)**
+#### ③ ⚠️ 常见错误与混淆 (Common Mistakes & Confusions)
 1.  **排列 vs. 组合 (Permutation vs. Combination):** 排列关心顺序 (order matters), 组合不关心 (order doesn't matter).
 2.  **独立 vs. 互斥 (Independent vs. Disjoint):** 若 $P(A), P(B) > 0$, 则 $A, B$ 互斥 $\implies$ $P(A \cap B) = 0 \neq P(A)P(B) \implies$ $A, B$ 不独立 (相关).互斥意味着“有你没我”。如果我知道 $A$ 发生了，那 $B$ 肯定没发生。这意味着 $A$ 的信息极大地影响了对 $B$ 的判断，所以它们**极度相关**。
 3.  **零概率 vs. 不可能事件 (Null vs. Impossible):** $P(A)=0$ (零概率) $\not\implies A=\emptyset$ (不可能). 连续 RV 取单点概率为0但可能发生.
 4.  **辛普森悖论 (Simpson's Paradox):** 分组数据中的趋势在合并后可能逆转.
 
 ---
-### **2. 离散型随机变量 (Discrete Random Variables)**
+### 2. 离散型随机变量 (Discrete Random Variables)
 
-#### **① 定义与性质 (Definitions & Properties)**
+#### ① 定义与性质 (Definitions & Properties)
 1.  **随机变量 (Random Variable, RV):** 函数 $X: \Omega \to \mathbb{R}$.
 2.  **分布函数 (CDF):** $F_X(x) = P(X \le x)$.
     *   性质: (i) 非降, (ii) 右连续, (iii) $\lim_{x\to-\infty} F(x) = 0$, (iv) $\lim_{x\to\infty} F(x) = 1$.
@@ -81,7 +81,7 @@
 
 
 
-#### **② ⚠️ 常见分布比较 (Common Distribution Comparisons)**
+#### ② ⚠️ 常见分布比较 (Common Distribution Comparisons)
 1.  **二项 vs. 超几何 (Binomial vs. Hypergeometric):**
     *   $B(n,p)$: 有放回抽样, 独立重复试验, $p$ 不变.
     *   $Hy(N,K,n)$: 无放回抽样, 非独立试验, 成功概率改变.
@@ -93,9 +93,9 @@
     *   当 $n \to \infty, p \to 0$ 且 $np=\lambda$ (常数) 时, $B(n, p) \approx P(\lambda)$.
 
 ---
-### **3. 连续型随机变量 (Continuous Random Variables)**
+### 3. 连续型随机变量 (Continuous Random Variables)
 
-#### **① 定义与性质 (Definitions & Properties)**
+#### ① 定义与性质 (Definitions & Properties)
 1.  **概率密度函数 (PDF):** $f_X(x)$ 满足 $F_X(x) = \int_{-\infty}^x f(u)du$.
     *   性质: (i) $f(x) \ge 0$, (ii) $\int_{-\infty}^\infty f(x)dx = 1$.
     *   关系: $f(x) = F'(x)$.
@@ -123,9 +123,9 @@
 
 ---
 
-### **4. 联合与多维分布 (Joint & Multivariate Distributions)**
+### 4. 联合与多维分布 (Joint & Multivariate Distributions)
 
-#### **① 定义与概念 (Definitions & Concepts)**
+#### ① 定义与概念 (Definitions & Concepts)
 1.  **联合分布 (Joint Distribution):**
     *   **联合 CDF:** $F(x,y) = P(X \le x, Y \le y)$。
         *   性质: (i) 非降, (ii) 右连续, (iii) $\lim_{x,y\to-\infty} F(x,y) = 0$, (iv) $\lim_{x,y\to\infty} F(x,y) = 1$。
@@ -157,7 +157,7 @@
     *   $N_t - N_s \sim P(\lambda(t-s))$。
 9.  **多维正态分布 (Multivariate Normal):** 随机向量 $(X_1, \dots, X_d)$ 的任意线性组合 $\sum t_j X_j$ 均服从正态分布。
 
-#### **② 公式与方程 (Formulas & Equations)**
+#### ② 公式与方程 (Formulas & Equations)
 1.  **联合期望 (Joint Expectation):**
     *   **离散:** $E[g(X,Y)] = \sum_x \sum_y g(x,y) f(x,y)$。
     *   **连续:** $E[g(X,Y)] = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x,y) f(x,y) dxdy$。
@@ -195,47 +195,88 @@
     *   **Wald's Identity (期望)**: $E[Z] = E[N] \cdot E[X]$
     *   **方差公式**: $Var(Z) = E[N]Var(X) + (E[X])^2 Var(N)$ （利用全方差公式推导）
 
-#### **③ 常见错误与混淆 (Common Mistakes & Confusions)**
+#### ③ 常见错误与混淆 (Common Mistakes & Confusions)
 1.  **不相关 vs. 独立:** 独立 (Independent) $\implies$ 不相关 (Uncorrelated, $Cov=0$)。反之不成立，除非是多维正态分布。
     *   反例: $X \sim N(0,1), Y=X^2$。$X, Y$ 不相关但相关。
 
-#### **④ 关键点与补充 (Key Points & Additional Notes)**
+#### ④ 关键点与补充 (Key Points & Additional Notes)
 1.  **i.i.d. 连续随机变量的对称性:** 对于 i.i.d. 连续 RV $X_1, \dots, X_n$，任何一种排序 $P(X_{p(1)} < \dots < X_{p(n)})$ 的概率都是 $1/n!$。
 
 ---
 
----
 
----
+### 5. 不等式与收敛模式 (Inequalities & Modes of Convergence)
 
-### **5. 不等式与收敛模式 (Inequalities & Modes of Convergence)**
+#### ① 定义与概念 (Definitions & Concepts)
+1.  **依概率收敛 (Convergence in Probability):** $X_n \xrightarrow{\mathbb{P}} c$ 当且仅当 $\forall \epsilon > 0, \lim_{n\to\infty} P(|X_n - c| > \epsilon) = 0$。
+    *   **等价形式**: $\lim_{n\to\infty} P(|X_n - c| \le \epsilon) = 1$。
+    *   **直观理解**: 当 $n$ 越来越大时，$X_n$ 离 $c$ 很远的概率趋向于0。
+2.  **依分布收敛 (Convergence in Distribution):** $X_n \xrightarrow{d} X$ 当且仅当 $\lim_{n\to\infty} F_n(x) = F(x)$ 对所有 $F(x)$ 的连续点成立。
+    *   **注意**: 依分布收敛是最弱的收敛模式。
+    *   **关系**: 依概率收敛 $\implies$ 依分布收敛（反之不成立）。
+3.  **几乎必然收敛 (Almost Sure Convergence):** $X_n \xrightarrow{a.s.} c$ 当且仅当 $P(\lim_{n\to\infty} X_n = c) = 1$。
+    *   **关系**: 几乎必然收敛 $\implies$ 依概率收敛（反之不成立）。
+4.  **特征函数 (Characteristic Function):** $\phi_X(t) = E[e^{itX}]$。
+5.  **同分布记号**: 当 $X_1, X_2, \dots$ 同分布时，下标可以统一写成 $X$，因为服从相同的分布。
 
-#### **① 定义与概念 (Definitions & Concepts)**
-1.  **依概率收敛 (Convergence in Probability):** $X_n \xrightarrow{P} c$ if $\forall \epsilon > 0, \lim_{n\to\infty} P(|X_n - c| > \epsilon) = 0$。
-2.  **依分布收敛 (Convergence in Distribution):** $X_n \xrightarrow{d} X$ if $\lim_{n\to\infty} F_n(x) = F(x)$ 对所有 $F(x)$ 的连续点成立。
-3.  **特征函数 (Characteristic Function):** $\phi_X(t) = E[e^{itX}]$。
-4. 同分布：x1 x2等等下标可以统一写成x,因为服从相同的分布
+#### ② 不等式 (Inequalities)
+1.  **马尔可夫不等式 (Markov's Inequality):** 对非负 RV $X$ 和 $a>0$：
+    $$P(X \ge a) \le \frac{E[X]}{a}$$
+    *   **适用条件**: $X \ge 0$，$E[X] < \infty$。
+    *   **记忆**: 期望除以阈值。
+2.  **切比雪夫不等式 (Chebyshev's Inequality):** 对任意 RV $X$ 和 $\epsilon>0$：
+    $$P(|X - \mu| \ge \epsilon) \le \frac{Var(X)}{\epsilon^2}$$
+    其中 $\mu = E[X]$。
+    *   **推导**: 应用马尔可夫不等式到 $(X-\mu)^2$。
+    *   **用途**: 证明WLLN的核心工具。
 
-#### **② 公式与方程 (Formulas & Equations)**
-1.  **马尔可夫不等式 (Markov's Inequality):** 对非负 RV $X$ 和 $\epsilon>0$, $P(X \ge \epsilon) \le \frac{E[X]}{\epsilon}$。
-2.  **切比雪夫不等式 (Chebyshev's Inequality):** $P(|X - \mu| \ge \epsilon) \le \frac{Var(X)}{\epsilon^2}$。
-3.  **弱大数定律 (Weak Law of Large Numbers, WLLN):** 若 $X_i$ i.i.d. 且 $E[|X_1|] < \infty$，则 $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \xrightarrow{P} E[X_1]$。
-4.  **中心极限定理 (Central Limit Theorem, CLT):** 若 $X_i$ i.i.d. 且 $E[X_1^2] < \infty$ (即均值 $\mu$ 和方差 $\sigma^2$ 存在)，则 $\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} = \frac{\sum X_i - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0, 1)$。
+#### ③ 大数定律 (Laws of Large Numbers)
+1.  **弱大数定律 (Weak Law of Large Numbers, WLLN):** 
+    *   **条件**: $X_i$ i.i.d. 且 $E[|X_1|] < \infty$。
+    *   **结论**: $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \xrightarrow{\mathbb{P}} E[X_1]$。
+    *   **证明思路**: 
+        1. 计算 $E[\bar{X}_n] = E[X_1]$，$Var(\bar{X}_n) = \frac{Var(X_1)}{n}$。
+        2. 应用切比雪夫不等式：$P(|\bar{X}_n - E[X_1]| > \epsilon) \le \frac{Var(X_1)}{n\epsilon^2} \to 0$。
+2.  **强大数定律 (Strong Law of Large Numbers, SLLN):**
+    *   **条件**: $X_i$ i.i.d. 且 $E[|X_1|] < \infty$。
+    *   **结论**: $\bar{X}_n \xrightarrow{a.s.} E[X_1]$。
+    *   **区别**: SLLN 比 WLLN 更强（几乎必然收敛 vs. 依概率收敛）。
 
-#### **③ 常见错误与混淆 (Common Mistakes & Confusions)**
+#### ④ 中心极限定理 (Central Limit Theorem)
+1.  **中心极限定理 (CLT):**
+    *   **条件**: $X_i$ i.i.d. 且 $E[X_1^2] < \infty$ (即均值 $\mu$ 和方差 $\sigma^2$ 存在)。
+    *   **结论**: $$\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0, 1)$$
+    *   **等价形式**: $\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} N(0, \sigma^2)$。
+    *   **应用**: 当 $n$ 足够大时，$\bar{X}_n \approx N(\mu, \sigma^2/n)$。
+
+#### ⑤ 连续映射定理 (Continuous Mapping Theorem)
+1.  **依概率收敛版本**: 若 $X_n \xrightarrow{\mathbb{P}} X$ 且 $g$ 连续，则 $g(X_n) \xrightarrow{\mathbb{P}} g(X)$。
+2.  **依分布收敛版本**: 若 $X_n \xrightarrow{d} X$ 且 $g$ 连续，则 $g(X_n) \xrightarrow{d} g(X)$。
+3.  **常见应用**:
+    *   若 $\ln X_n \xrightarrow{\mathbb{P}} c$，则 $X_n = e^{\ln X_n} \xrightarrow{\mathbb{P}} e^c$。
+    *   若 $X_n \xrightarrow{\mathbb{P}} \mu$，则 $X_n^2 \xrightarrow{\mathbb{P}} \mu^2$。
+
+#### ⑥ 常见错误与混淆 (Common Mistakes & Confusions)
 1.  **WLLN vs. CLT:**
     *   **WLLN** 描述了样本均值会收敛到一个**常数** (总体均值)。
     *   **CLT** 描述了标准化后的样本均值的**分布**会趋近于标准正态分布。
-    * Gumbel 说的是"某些分布的最大值，做适当变换后都趋向 Gumbel
+2.  **收敛模式的强弱关系**:
+    $$\text{几乎必然收敛} \implies \text{依概率收敛} \implies \text{依分布收敛}$$
+    反向蕴含都不成立。
+3.  **依分布收敛到常数**: 若 $X_n \xrightarrow{d} c$ (常数)，则 $X_n \xrightarrow{\mathbb{P}} c$。
 
-#### **④ 关键点与补充 (Key Points & Additional Notes)**
+#### ⑦ 关键点与补充 (Key Points & Additional Notes)
 1.  **通过特征函数判断依分布收敛:** $X_n \xrightarrow{d} X \iff \lim_{n\to\infty} \phi_{X_n}(t) = \phi_X(t)$ 对所有 $t$ 成立。
 2.  **CLT 应用:** 提供了用正态分布近似大量 i.i.d. 随机变量之和的分布的理论依据。
+3.  **证明技巧总结**:
+    *   证明依概率收敛 → 用切比雪夫不等式
+    *   证明依分布收敛 → 用特征函数或直接验证CDF
+    *   涉及乘积/几何平均 → 取对数转化为求和
+    *   涉及连续函数 → 用连续映射定理
 
-
-概率论证明题最后一句话：
-Since the equality is true for every n it holds in the limit，（由于对每个n成立，极限成立）
-the function 1 − e−v is the CDF of an E(1) random variable.（识别函数分布）
+**概率论证明题常用结尾**：
+- "Since the equality is true for every $n$, it holds in the limit." (由于对每个 $n$ 成立，极限成立)
+- "The function $1 - e^{-v}$ is the CDF of an $E(1)$ random variable." (识别函数分布)
 
 ---
 

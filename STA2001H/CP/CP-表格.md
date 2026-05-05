@@ -56,16 +56,16 @@
 | 尾概率      | $P(X > n) = \sum_{x=n+1}^{\infty} (1-\theta)^{x-1}\theta$ | $(1-\theta)^n$       | 知道n+1次或更晚才发生   |
 # 5️⃣ i.i.d数据表
 
-| **特性 / 统计量** | **均值 $\bar{X}_n$**                   | **最大值 $Y_n$**                                              | **最小值 $Z_n$**                           |
-| :----------- | :----------------------------------- | :--------------------------------------------------------- | :-------------------------------------- |
-| **数学表达**     | $\bar{X}_n = \frac{1}{n}\sum X_i$    | $Y_n = \max\{X_1,\dots,X_n\}$                              | $Z_n = \min\{X_1,\dots,X_n\}$           |
-| 期望           | $\mathbb{E}[\bar{X}_n] = \mu$        | $\mathbb{E}[Y_n] = \int_{-\infty}^{\infty} x \cdot n[F(x)]^{n-1}f(x) dx$ | $\mathbb{E}[Z_n] = \int_{-\infty}^{\infty} x \cdot n[1-F(x)]^{n-1}f(x) dx$ |
-| 方差           | $Var(\bar{X}_n) = \frac{\sigma^2}{n}$ | $Var(Y_n) = \mathbb{E}[Y_n^2] - (\mathbb{E}[Y_n])^2$<br>*(需用PDF积分计算)* | $Var(Z_n) = \mathbb{E}[Z_n^2] - (\mathbb{E}[Z_n])^2$<br>*(需用PDF积分计算)* |
-| **CDF**      | *(无通用公式，依赖原分布)*                      | $F_{Y_n}(x)= \mathbb{P}(Y_n \leq x)$ $= \mathbf{[F(x)]^n}$ | $F_{Z_n}(x)= \mathbf{1 - [1 - F(x)]^n}$ |
-| **PDF**      | *(无通用公式，依赖原分布)*                      | $f_{Y_n}(x) =\mathbb{P}(Y_n \leq x)$$=1 - [1-F(x)]^n$      | $f_{Z_n}(x) = n[1 - F(x)]^{n-1}f(x)$    |
-| **本身的问题**    | 趋向常数 $\mu$（WLLN）                     | 趋向 $+\infty$                                               | 趋向 $-\infty$（或0）                        |
-| **怎么拉回来**    | 减 $\mu$，再除以 $\sigma/\sqrt{n}$（CLT方法） | 减 $\log n$                                                 | 乘以 $n$                                  |
-| **极限分布**     | $N(0,1)$                             | Gumbel，$e^{-e^{-x}}$                                       | 指数分布                                    |
+| **特性 / 统计量** | **均值 $\bar{X}_n$**                    | **最大值 $Y_n$**                                                            | **最小值 $Z_n$**                                                              |
+| :----------- | :------------------------------------ | :----------------------------------------------------------------------- | :------------------------------------------------------------------------- |
+| **数学表达**     | $\bar{X}_n = \frac{1}{n}\sum X_i$     | $Y_n = \max\{X_1,\dots,X_n\}$                                            | $Z_n = \min\{X_1,\dots,X_n\}$                                              |
+| 期望           | $\mathbb{E}[\bar{X}_n] = \mu$         | $\mathbb{E}[Y_n] = \int_{-\infty}^{\infty} x \cdot n[F(x)]^{n-1}f(x) dx$ | $\mathbb{E}[Z_n] = \int_{-\infty}^{\infty} x \cdot n[1-F(x)]^{n-1}f(x) dx$ |
+| 方差           | $Var(\bar{X}_n) = \frac{\sigma^2}{n}$ | $Var(Y_n) = \mathbb{E}[Y_n^2] - (\mathbb{E}[Y_n])^2$<br>*(需用PDF积分计算)*    | $Var(Z_n) = \mathbb{E}[Z_n^2] - (\mathbb{E}[Z_n])^2$<br>*(需用PDF积分计算)*      |
+| **CDF**      | *(无通用公式，依赖原分布)*                       | $F_{Y_n}(x)= \mathbb{P}(Y_n \leq x)$ $= \mathbf{[F(x)]^n}$               | $F_{Z_n}(x)= \mathbf{1 - [1 - F(x)]^n}$                                    |
+| **PDF**      | *(无通用公式，依赖原分布)*                       | $f_{Y_n}(x) =\mathbb{P}(Y_n \leq x)$$=1 - [1-F(x)]^n$                    | $f_{Z_n}(x) = n[1 - F(x)]^{n-1}f(x)$                                       |
+| **本身的问题**    | 趋向常数 $\mu$（WLLN）                      | 趋向 $+\infty$                                                             | 趋向 $-\infty$（或0）                                                           |
+| **怎么拉回来**    | 减 $\mu$，再除以 $\sigma/\sqrt{n}$（CLT方法）  | 减 $\log n$                                                               | 乘以 $n$                                                                     |
+| **极限分布**     | $N(0,1)$                              | Gumbel，$e^{-e^{-x}}$                                                     | 指数分布                                                                       |
 
 
 # 6️⃣导数速查表
