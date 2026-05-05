@@ -68,6 +68,15 @@
 6.  **矩生成函数 (MGF):** $M_X(t) = E[e^{tX}]$.
     *   $E[X^k] = M_X^{(k)}(0)$ (在0点的k阶导数).
     *   ⚠️ MGF 唯一确定分布 (若存在).
+7.  **概率生成函数 (PGF):** $G_X(s) = E[s^X] = \sum_{k=0}^\infty p_k s^k$ （仅适用于离散型非负整数随机变量）。
+    *   **性质**: 
+        *   $G_X(1) = 1$
+        *   $E[X] = G_X'(1)$
+        *   $Var(X) = G_X''(1) + G_X'(1) - [G_X'(1)]^2$
+    *   **常见 PGF**:
+        *   **Poisson($\lambda$)**: $G(s) = e^{\lambda(s-1)}$
+        *   **Geometric($p$)**: $G(s) = \frac{ps}{1-(1-p)s}$ (从1开始) 或 $\frac{p}{1-(1-p)s}$ (从0开始)
+        *   **Binomial($n,p$)**: $G(s) = (q+ps)^n$
 
 
 
@@ -112,6 +121,8 @@
 - 如果题目出现 **"at least (至少) / at most (至多)"** $\rightarrow$ 把对应的**求概率公式**进行累加 (离散型用 $\sum$) 或积分 (连续型用 $\int$)。例如至少3次就是 $1 - P(X=0) - P(X=1) - P(X=2)$。
 
 
+---
+
 ### **4. 联合与多维分布 (Joint & Multivariate Distributions)**
 
 #### **① 定义与概念 (Definitions & Concepts)**
@@ -134,6 +145,8 @@
 
 #### **② 公式与方程 (Formulas & Equations)**
 1.  **全期望公式 (Law of Total Expectation):** $E[Y] = E[E[Y|X]]$。
+    *   **Taking out what is known**: $E[g(X)Y | X] = g(X) E[Y|X]$。
+    *   *直观理解*：在已知 $X$ 的条件下，$g(X)$ 就像一个常数，可以提到期望符号外面。
 2.  **条件方差公式 (Law of Total Variance):** $Var(Y) = E[Var(Y|X)] + Var(E[Y|X])$。
 3.  **随机变量函数转换 (Change of Variables):**
     *   **一维:** $Y=g(X)$, $f_Y(y) = f_X(g^{-1}(y)) |\frac{d}{dy}g^{-1}(y)|$。
@@ -144,6 +157,12 @@
     *   若 $Z_i \stackrel{i.i.d.}{\sim} N(0,1)$, 则 $\sum_{i=1}^n Z_i^2 \sim \chi_n^2$ (卡方分布 Chi-squared)。
     *   若 $Z \sim N(0,1), Y \sim \chi_n^2$ 且独立, 则 $\frac{Z}{\sqrt{Y/n}} \sim t_n$ (t-分布)。
     *   若 $X \sim \chi_{d_1}^2, Y \sim \chi_{d_2}^2$ 且独立, 则 $\frac{X/d_1}{Y/d_2} \sim F_{d_1, d_2}$ (F-分布)。
+7.  **随机项数之和 (Compound Distribution / Random Sums):**
+    *   设 $Z = X_1 + X_2 + \dots + X_N$，其中 $N$ 是随机变量，$X_i$ 是 i.i.d. 且独立于 $N$。
+    *   **PGF 复合公式**: $G_Z(s) = G_N(G_X(s))$ （记忆法：$N$ 在外面，因为 $N$ 决定了层数）
+    *   **MGF 复合公式**: $M_Z(t) = G_N(M_X(t))$ 或 $M_N(\ln M_X(t))$
+    *   **Wald's Identity (期望)**: $E[Z] = E[N] \cdot E[X]$
+    *   **方差公式**: $Var(Z) = E[N]Var(X) + (E[X])^2 Var(N)$ （利用全方差公式推导）
 
 #### **③ 常见错误与混淆 (Common Mistakes & Confusions)**
 1.  **不相关 vs. 独立:** 独立 (Independent) $\implies$ 不相关 (Uncorrelated, $Cov=0$)。反之不成立，除非是多维正态分布。
@@ -154,12 +173,17 @@
 
 ---
 
+---
+
+---
+
 ### **5. 不等式与收敛模式 (Inequalities & Modes of Convergence)**
 
 #### **① 定义与概念 (Definitions & Concepts)**
 1.  **依概率收敛 (Convergence in Probability):** $X_n \xrightarrow{P} c$ if $\forall \epsilon > 0, \lim_{n\to\infty} P(|X_n - c| > \epsilon) = 0$。
 2.  **依分布收敛 (Convergence in Distribution):** $X_n \xrightarrow{d} X$ if $\lim_{n\to\infty} F_n(x) = F(x)$ 对所有 $F(x)$ 的连续点成立。
 3.  **特征函数 (Characteristic Function):** $\phi_X(t) = E[e^{itX}]$。
+4. 同分布：x1 x2等等下标可以统一写成x,因为服从相同的分布
 
 #### **② 公式与方程 (Formulas & Equations)**
 1.  **马尔可夫不等式 (Markov's Inequality):** 对非负 RV $X$ 和 $\epsilon>0$, $P(X \ge \epsilon) \le \frac{E[X]}{\epsilon}$。
