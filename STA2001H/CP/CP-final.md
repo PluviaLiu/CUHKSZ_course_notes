@@ -127,176 +127,64 @@
 
 #### ① 定义与概念 (Definitions & Concepts)
 1.  **联合分布 (Joint Distribution):**
-    *   **联合 CDF:** $F(x,y) = P(X \le x, Y \le y)$。
-        *   性质: (i) 非降, (ii) 右连续, (iii) $\lim_{x,y\to-\infty} F(x,y) = 0$, (iv) $\lim_{x,y\to\infty} F(x,y) = 1$。
-    *   **离散型 (Jointly Discrete):** 若 $(X,Y)$ 只取可数个值，则有联合 PMF $f(x,y) = P(X=x, Y=y)$。
-        *   性质: (i) $f(x,y) \ge 0$, (ii) $\sum_x \sum_y f(x,y) = 1$。
-    *   **连续型 (Jointly Continuous):** 若存在联合 PDF $f: \mathbb{R}^2 \to [0, \infty)$ 使得 $F(x,y) = \int_{-\infty}^y \int_{-\infty}^x f(u,v)dudv$。
-        *   性质: (i) $f(x,y) \ge 0$, (ii) $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy = 1$。
-        *   关系: $f(x,y) = \frac{\partial^2 F(x,y)}{\partial x \partial y}$ (在连续点处)。
-        *   ⚠️ $f(x,y)$ 不是概率, $P(X=x, Y=y)=0$。
-2.  **边缘分布 (Marginal Distribution):**
-    *   **离散 PMF:** $f_X(x) = \sum_y f(x,y)$。
-    *   **连续 PDF:** $f_X(x) = \int_{-\infty}^\infty f(x,y)dy$。
-    *   💡 **口诀：求谁就不积谁** (求 $X$ 的边缘，就把 $y$ 积分积掉)。
-3.  **条件分布 (Conditional Distribution):** 
-    *   **离散:** $f(y|x) = \frac{f(x,y)}{f_X(x)}$ (要求 $f_X(x)>0$)。
-    *   **连续:** $f(y|x) = \frac{f(x,y)}{f_X(x)}$ (要求 $f_X(x)>0$)。
-    *   💡 **口诀：条件在下，联合在上**。
-4.  **独立性 (Independence):**
-    *   **离散:** $X, Y$ 独立 $\iff f(x,y) = f_X(x) \cdot f_Y(y)$ 对所有 $(x,y)$ 成立。
-    *   **连续:** $X, Y$ 独立 $\iff f(x,y) = f_X(x) \cdot f_Y(y)$ 对所有 $(x,y)$ 成立。
-    *   **通用 CDF:** $X, Y$ 独立 $\iff F(x,y) = F_X(x) \cdot F_Y(y)$ 对所有 $(x,y)$ 成立。
-    *   ⚠️ **支持集检验**: 若 $x$ 和 $y$ 的取值范围相互依赖（如 $0 < x < y < 1$），则**直接判定不独立**，无需验证公式。
-5.  **协方差 (Covariance):** $Cov(X,Y) = E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y]$。
-6.  **相关系数 (Correlation):** $\rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$，其中 $|\rho| \le 1$。
-7.  **顺序统计量 (Order Statistics):** 随机样本 $X_1, \dots, X_n$ 从小到大排序后的值 $X_{(1)} \le \dots \le X_{(n)}$。
-8.  **泊松过程 (Poisson Process):** 速率为 $\lambda$ 的计数过程 $\{N_t\}$。
-    *   $N_0=0$。
-    *   增量独立且平稳。
-    *   $N_t - N_s \sim P(\lambda(t-s))$。
-9.  **多维正态分布 (Multivariate Normal):** 随机向量 $(X_1, \dots, X_d)$ 的任意线性组合 $\sum t_j X_j$ 均服从正态分布。
+    *   **联合 CDF:** $F(x,y) = P(X \le x, Y \le y)$
+    *   **联合 PDF/PMF:** $f(x,y)$（离散用求和，连续用积分）
+        *   性质: $f(x,y) \ge 0$，全概率归一（$\sum\sum = 1$ 或 $\int\int = 1$）
+        *   ⚠️ 连续型：$f(x,y)$ 不是概率，$P(X=x, Y=y)=0$
+2.  **边缘分布 (Marginal):** $f_X(x) = \sum_y f(x,y)$ 或 $\int f(x,y)dy$
+    *   💡 **口诀：求谁就不积谁**
+3.  **条件分布 (Conditional):** $f(y|x) = \frac{f(x,y)}{f_X(x)}$（要求 $f_X(x)>0$）
+    *   💡 **口诀：条件在下，联合在上**
+4.  **独立性 (Independence):** $f(x,y) = f_X(x) \cdot f_Y(y)$ 对所有 $(x,y)$ 成立
+    *   ⚠️ **支持集检验**: 若 $x$ 和 $y$ 的取值范围相互依赖（如 $0 < x < y < 1$），则**直接判定不独立**
+5.  **协方差:** $Cov(X,Y) = E[XY] - E[X]E[Y]$
+6.  **相关系数:** $\rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$，$|\rho| \le 1$
 
-#### ② 公式与方程 (Formulas & Equations)
-1.  **联合期望 (Joint Expectation):**
-    *   **离散:** $E[g(X,Y)] = \sum_x \sum_y g(x,y) f(x,y)$。
-    *   **连续:** $E[g(X,Y)] = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x,y) f(x,y) dxdy$。
-    *   **特例:** $E[XY] = \int_{-\infty}^\infty \int_{-\infty}^\infty xy \cdot f(x,y) dxdy$ (用于计算协方差)。
-2.  **条件期望 (Conditional Expectation):**
-    *   **离散:** $E[Y|X=x] = \sum_y y \cdot f(y|x)$。
-    *   **连续:** $E[Y|X=x] = \int_{-\infty}^\infty y \cdot f(y|x) dy$。
-    *   ⚠️ **注意**: 积分里用的是**条件 PDF** $f(y|x)$，不是联合 PDF $f(x,y)$。
-3.  **区域概率计算 (Probability over Regions):**
-    *   对于连续型随机变量，计算 $P(X \in A, Y \in B)$ 需要在对应区域上积分：
-        $$P((X,Y) \in D) = \iint_D f(x,y) \, dx \, dy$$
-    *   **常见情况**：
-        *   $P(X > Y) = \int_{-\infty}^{\infty} \int_{y}^{\infty} f(x,y) \, dx \, dy = \int_{-\infty}^{\infty} \int_{-\infty}^{x} f(x,y) \, dy \, dx$
-        *   $P(X + Y \le c) = \iint_{x+y \le c} f(x,y) \, dx \, dy$
-        *   $P(X < Y < X+a) = \int_{-\infty}^{\infty} \int_{x}^{x+a} f(x,y) \, dy \, dx$
-    *   💡 **技巧**: 画出区域 $D$ 在 $(x,y)$ 平面上的图形，确定积分上下限的相互依赖关系。
-    *   💡 **对称性**: 若 $X, Y$ 独立同分布且连续，则 $P(X > Y) = P(Y > X) = \frac{1}{2}$ (因为 $P(X=Y)=0$)。
-4.  **全期望公式 (Law of Total Expectation):** $E[Y] = E[E[Y|X]]$。
-    *   **Taking out what is known**: $E[g(X)Y | X] = g(X) E[Y|X]$。
-    *   *直观理解*：在已知 $X$ 的条件下，$g(X)$ 就像一个常数，可以提到期望符号外面。
-5.  **条件方差公式 (Law of Total Variance):** $Var(Y) = E[Var(Y|X)] + Var(E[Y|X])$。
-6.  **随机变量函数转换 (Change of Variables):**
-    *   **一维:** $Y=g(X)$, $f_Y(y) = f_X(g^{-1}(y)) |\frac{d}{dy}g^{-1}(y)|$。
-    *   **多维:** $(Y_1, Y_2) = T(X_1, X_2)$, $g(y_1, y_2) = f(T^{-1}(y_1, y_2)) |J|$。其中 $J$ 是 $T^{-1}$ 变换的雅可比行列式 (Jacobian) 的绝对值。
-7.  **顺序统计量 PDF:** $X_{(j)}$ 的 PDF 为 $f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!} f(x) [F(x)]^{j-1} [1-F(x)]^{n-j}$。
-8.  **泊松过程与指数分布:** 泊松过程的事件间隔时间服从独立的指数分布，参数为 $\lambda$。
-9.  **正态相关分布 (Distributions related to Normal):**
-    *   若 $Z_i \stackrel{i.i.d.}{\sim} N(0,1)$, 则 $\sum_{i=1}^n Z_i^2 \sim \chi_n^2$ (卡方分布 Chi-squared)。
-    *   若 $Z \sim N(0,1), Y \sim \chi_n^2$ 且独立, 则 $\frac{Z}{\sqrt{Y/n}} \sim t_n$ (t-分布)。
-    *   若 $X \sim \chi_{d_1}^2, Y \sim \chi_{d_2}^2$ 且独立, 则 $\frac{X/d_1}{Y/d_2} \sim F_{d_1, d_2}$ (F-分布)。
-10.  **随机项数之和 (Compound Distribution / Random Sums):**
-    *   设 $Z = X_1 + X_2 + \dots + X_N$，其中 $N$ 是随机变量，$X_i$ 是 i.i.d. 且独立于 $N$。
-    *   **PGF 复合公式**: $G_Z(s) = G_N(G_X(s))$ （记忆法：$N$ 在外面，因为 $N$ 决定了层数）
-    *   **MGF 复合公式**: $M_Z(t) = G_N(M_X(t))$ 或 $M_N(\ln M_X(t))$
-    *   **Wald's Identity (期望)**: $E[Z] = E[N] \cdot E[X]$
-    *   **方差公式**: $Var(Z) = E[N]Var(X) + (E[X])^2 Var(N)$ （利用全方差公式推导）
+#### ② 核心公式 (Key Formulas)
+1.  **联合期望:** $E[g(X,Y)] = \sum\sum g(x,y)f(x,y)$ 或 $\iint g(x,y)f(x,y)dxdy$
+    *   特例：$E[XY] = \iint xy \cdot f(x,y)dxdy$（用于算协方差）
+2.  **条件期望:** $E[Y|X=x] = \sum y \cdot f(y|x)$ 或 $\int y \cdot f(y|x)dy$
+    *   ⚠️ 用的是**条件PDF** $f(y|x)$，不是联合PDF
+3.  **全期望公式:** $E[Y] = E[E[Y|X]]$
+    *   **Taking out known**: $E[g(X)Y|X] = g(X)E[Y|X]$
+4.  **全方差公式:** $Var(Y) = E[Var(Y|X)] + Var(E[Y|X])$
+5.  **区域概率 (连续):** $P(X>Y) = \int_{-\infty}^{\infty}\int_y^{\infty} f(x,y)dxdy$
+    *   💡 画图确定积分上下限；若$X,Y$独立同分布，$P(X>Y)=\frac{1}{2}$
+6.  **随机项数之和:** 设 $Z = X_1 + \cdots + X_N$（$N$随机，$X_i$ i.i.d.且独立于$N$）
+    *   **PGF复合**: $G_Z(s) = G_N(G_X(s))$（$N$在外面）
+    *   **期望**: $E[Z] = E[N] \cdot E[X]$
+    *   **方差**: $Var(Z) = E[N]Var(X) + (E[X])^2Var(N)$
 
-#### ③ 常见错误与混淆 (Common Mistakes & Confusions)
-1.  **不相关 vs. 独立:** 独立 (Independent) $\implies$ 不相关 (Uncorrelated, $Cov=0$)。反之不成立，除非是多维正态分布。
-    *   反例: $X \sim N(0,1), Y=X^2$。$X, Y$ 不相关但相关。
-
-#### ④ 关键点与补充 (Key Points & Additional Notes)
-1.  **i.i.d. 连续随机变量的对称性:** 对于 i.i.d. 连续 RV $X_1, \dots, X_n$，任何一种排序 $P(X_{p(1)} < \dots < X_{p(n)})$ 的概率都是 $1/n!$。
+#### ③ 常见错误 (Common Mistakes)
+1.  **不相关 ≠ 独立:** 独立$\implies$不相关($Cov=0$)，反之不成立
+    *   反例: $X \sim N(0,1), Y=X^2$不相关但不独立
 
 ---
 
 
-### 5. 不等式与收敛模式 (Inequalities & Modes of Convergence)
+### 5. 不等式与收敛模式 (Inequalities & Convergence)
 
-#### ① 定义与概念 (Definitions & Concepts)
-1.  **依概率收敛 (Convergence in Probability):** $X_n \xrightarrow{\mathbb{P}} c$ 当且仅当 $\forall \epsilon > 0, \lim_{n\to\infty} P(|X_n - c| > \epsilon) = 0$。
-    *   **等价形式**: $\lim_{n\to\infty} P(|X_n - c| \le \epsilon) = 1$。
-    *   **直观理解**: 当 $n$ 越来越大时，$X_n$ 离 $c$ 很远的概率趋向于0。
-2.  **依分布收敛 (Convergence in Distribution):** $X_n \xrightarrow{d} X$ 当且仅当 $\lim_{n\to\infty} F_n(x) = F(x)$ 对所有 $F(x)$ 的连续点成立。
-    *   **注意**: 依分布收敛是最弱的收敛模式。
-    *   **关系**: 依概率收敛 $\implies$ 依分布收敛（反之不成立）。
-3.  **几乎必然收敛 (Almost Sure Convergence):** $X_n \xrightarrow{a.s.} c$ 当且仅当 $P(\lim_{n\to\infty} X_n = c) = 1$。
-    *   **关系**: 几乎必然收敛 $\implies$ 依概率收敛（反之不成立）。
-4.  **特征函数 (Characteristic Function):** $\phi_X(t) = E[e^{itX}]$。
-5.  **同分布记号**: 当 $X_1, X_2, \dots$ 同分布时，下标可以统一写成 $X$，因为服从相同的分布。
+#### ① 核心定义 (Definitions)
+1.  **依概率收敛:** $X_n \xrightarrow{\mathbb{P}} c \iff \forall \epsilon > 0, \lim_{n\to\infty} P(|X_n - c| > \epsilon) = 0$
+2.  **依分布收敛:** $X_n \xrightarrow{d} X \iff \lim_{n\to\infty} F_n(x) = F(x)$（在$F$的连续点）
+3.  **收敛强弱:** 几乎必然 $\implies$ 依概率 $\implies$ 依分布
 
-#### ② 不等式 (Inequalities)
-1.  **马尔可夫不等式 (Markov's Inequality):** 对非负 RV $X$ 和 $a>0$：
-    $$P(X \ge a) \le \frac{E[X]}{a}$$
-    *   **适用条件**: $X \ge 0$，$E[X] < \infty$。
-    *   **记忆**: 期望除以阈值。
-2.  **切比雪夫不等式 (Chebyshev's Inequality):** 对任意 RV $X$ 和 $\epsilon>0$：
-    $$P(|X - \mu| \ge \epsilon) \le \frac{Var(X)}{\epsilon^2}$$
-    其中 $\mu = E[X]$。
-    *   **推导**: 应用马尔可夫不等式到 $(X-\mu)^2$。
-    *   **用途**: 证明WLLN的核心工具。
+#### ② 核心不等式 (Inequalities)
+1.  **马尔可夫不等式**（$X \ge 0$）: $P(X \ge a) \le \frac{E[X]}{a}$
+2.  **切比雪夫不等式**: $P(|X - \mu| \ge \epsilon) \le \frac{Var(X)}{\epsilon^2}$
 
-#### ③ 大数定律 (Laws of Large Numbers)
-1.  **弱大数定律 (Weak Law of Large Numbers, WLLN):** 
-    *   **条件**: $X_i$ i.i.d. 且 $E[|X_1|] < \infty$。
-    *   **结论**: $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \xrightarrow{\mathbb{P}} E[X_1]$。
-    *   **证明思路**: 
-        1. 计算 $E[\bar{X}_n] = E[X_1]$，$Var(\bar{X}_n) = \frac{Var(X_1)}{n}$。
-        2. 应用切比雪夫不等式：$P(|\bar{X}_n - E[X_1]| > \epsilon) \le \frac{Var(X_1)}{n\epsilon^2} \to 0$。
-2.  **强大数定律 (Strong Law of Large Numbers, SLLN):**
-    *   **条件**: $X_i$ i.i.d. 且 $E[|X_1|] < \infty$。
-    *   **结论**: $\bar{X}_n \xrightarrow{a.s.} E[X_1]$。
-    *   **区别**: SLLN 比 WLLN 更强（几乎必然收敛 vs. 依概率收敛）。
+#### ③ 核心定理 (Key Theorems)
+1.  **弱大数定律 (WLLN):** $\bar{X}_n = \frac{1}{n}\sum X_i \xrightarrow{\mathbb{P}} E[X_1]$（$X_i$ i.i.d.）
+    *   **证明套路**: 算$E[\bar{X}_n]=\mu$，$Var(\bar{X}_n)=\frac{\sigma^2}{n}$ → 切比雪夫 → 取极限
+2.  **中心极限定理 (CLT):** $\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} N(0,1)$
+    *   **应用**: $n$大时，$\bar{X}_n \approx N(\mu, \sigma^2/n)$
+3.  **连续映射定理:** 若$X_n \xrightarrow{\mathbb{P}} c$且$g$连续，则$g(X_n) \xrightarrow{\mathbb{P}} g(c)$
+    *   **常用**: $\ln X_n \to c \implies X_n \to e^c$
 
-#### ④ 中心极限定理 (Central Limit Theorem)
-1.  **中心极限定理 (CLT):**
-    *   **条件**: $X_i$ i.i.d. 且 $E[X_1^2] < \infty$ (即均值 $\mu$ 和方差 $\sigma^2$ 存在)。
-    *   **结论**: $$\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0, 1)$$
-    *   **等价形式**: $\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} N(0, \sigma^2)$。
-    *   **应用**: 当 $n$ 足够大时，$\bar{X}_n \approx N(\mu, \sigma^2/n)$。
-
-#### ⑤ 连续映射定理 (Continuous Mapping Theorem)
-1.  **依概率收敛版本**: 若 $X_n \xrightarrow{\mathbb{P}} X$ 且 $g$ 连续，则 $g(X_n) \xrightarrow{\mathbb{P}} g(X)$。
-2.  **依分布收敛版本**: 若 $X_n \xrightarrow{d} X$ 且 $g$ 连续，则 $g(X_n) \xrightarrow{d} g(X)$。
-3.  **常见应用**:
-    *   若 $\ln X_n \xrightarrow{\mathbb{P}} c$，则 $X_n = e^{\ln X_n} \xrightarrow{\mathbb{P}} e^c$。
-    *   若 $X_n \xrightarrow{\mathbb{P}} \mu$，则 $X_n^2 \xrightarrow{\mathbb{P}} \mu^2$。
-
-#### ⑥ 常见错误与混淆 (Common Mistakes & Confusions)
-1.  **WLLN vs. CLT:**
-    *   **WLLN** 描述了样本均值会收敛到一个**常数** (总体均值)。
-    *   **CLT** 描述了标准化后的样本均值的**分布**会趋近于标准正态分布。
-2.  **收敛模式的强弱关系**:
-    $$\text{几乎必然收敛} \implies \text{依概率收敛} \implies \text{依分布收敛}$$
-    反向蕴含都不成立。
-3.  **依分布收敛到常数**: 若 $X_n \xrightarrow{d} c$ (常数)，则 $X_n \xrightarrow{\mathbb{P}} c$。
-
-#### ⑦ 关键点与补充 (Key Points & Additional Notes)
-1.  **通过特征函数判断依分布收敛:** $X_n \xrightarrow{d} X \iff \lim_{n\to\infty} \phi_{X_n}(t) = \phi_X(t)$ 对所有 $t$ 成立。
-2.  **CLT 应用:** 提供了用正态分布近似大量 i.i.d. 随机变量之和的分布的理论依据。
-3.  **证明技巧总结**:
-    *   证明依概率收敛 → 用切比雪夫不等式
-    *   证明依分布收敛 → 用特征函数或直接验证CDF
-    *   涉及乘积/几何平均 → 取对数转化为求和
-    *   涉及连续函数 → 用连续映射定理
-
-**概率论证明题常用结尾**：
-- "Since the equality is true for every $n$, it holds in the limit." (由于对每个 $n$ 成立，极限成立)
-- "The function $1 - e^{-v}$ is the CDF of an $E(1)$ random variable." (识别函数分布)
+#### ④ 证明技巧 (Proof Techniques)
+1.  **证明依概率收敛** → 用切比雪夫不等式
+2.  **处理乘积** → 取对数变求和 → WLLN → 连续映射定理
+3.  **最大值极限** → CDF: $[F(x)]^n$ → 变换 → 极限公式: $\lim[1-a/n]^n = e^{-a}$
 
 ---
 
-#### 4. 考试时可以干什么？
-- 最大值的 CDF：$\mathbb{P}(Y_n \leq x) = [F(x)]^n$（独立→可以连乘，同分布→每个因子都是同一个 $F$）
-- **大数定律 (Law of Large Numbers)**：样本均值趋近总体均值
-- **中心极限定理 (Central Limit Theorem)**：样本均值标准化后趋近正态分布
-
-
-不是通用的，**只对特定类型的分布成立**。
-
-考试会**直接给你 $F(x)$**，让你自己算极限：
-
-● 代入 $F_{Y_n}(x) = [F(x)]^n$
-
-↓ 做变换（比如 $U_n = Y_n - \log n$）
-
-↓ 算 $\lim_{n\to\infty}[F(x + \log n)]^n$
-
-↓ 得到极限 CDF，验证合法性
-验证左极限为0，右极限为1，验证cdf单调不减
-
-↓ 认出它叫什么名字（加分，不认识也没关系）
