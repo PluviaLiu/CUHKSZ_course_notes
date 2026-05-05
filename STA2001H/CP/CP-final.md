@@ -177,6 +177,11 @@
 1.  **通过特征函数判断依分布收敛:** $X_n \xrightarrow{d} X \iff \lim_{n\to\infty} \phi_{X_n}(t) = \phi_X(t)$ 对所有 $t$ 成立。
 2.  **CLT 应用:** 提供了用正态分布近似大量 i.i.d. 随机变量之和的分布的理论依据。
 
+
+概率论证明题最后一句话：
+Since the equality is true for every n it holds in the limit，（由于对每个n成立，极限成立）
+the function 1 − e−v is the CDF of an E(1) random variable.（识别函数分布）
+
 ---
 
 #### 4. 考试时可以干什么？
@@ -196,5 +201,6 @@
 ↓ 算 $\lim_{n\to\infty}[F(x + \log n)]^n$
 
 ↓ 得到极限 CDF，验证合法性
+验证左极限为0，右极限为1，验证cdf单调不减
 
 ↓ 认出它叫什么名字（加分，不认识也没关系）
