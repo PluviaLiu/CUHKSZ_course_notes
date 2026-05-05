@@ -1,5 +1,5 @@
 
-#### 1️⃣离散随机变量查找表
+# 1️⃣离散随机变量查找表
 
 | 具体例子                | **情景描述与触发词 (Scenarios & Keywords)**                                                          | **锁定模型 (Distribution)** <br>求和等范围推导，上下限看支持集                                                                                                                                                                                                                                                                              | **标准解题动作 (四大公式闭眼套$M_X(t) = \sum e^{tx} \cdot P(X=x)$                                                                                                                                                        |
 | ------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -9,7 +9,7 @@
 | 一直单抽，直到抽出第1个金光才停手   | 一直做试验，**直到出现第1次成功**。<br>触发词: "the first time",<br>"until the first..."                       | **几何分布** Geometric $Ge(p)$<br>👉 **支持集:** $x \in \{1, 2, 3, \dots\}$<br>$p$单次中奖率，$x$第几次才出金。<br><br>**核心推导：**<br>关键：几何级数 $\sum_{k=1}^{\infty} r^{k-1} = \frac{1}{1-r}$，$r = (1-p)$ 或 $(1-p)e^t$<br>期望：$\mathbb{E}[X] = \sum_{x=1}^{\infty} x(1-p)^{x-1}p$，用参数求导法 $-p \frac{d}{dp}\sum (1-p)^x$<br>方差：$\mathbb{E}[X^2] = \sum_{x=1}^{\infty} x^2(1-p)^{x-1}p$，用二阶导 $p \frac{d^2}{dp^2}\sum (1-p)^{x+1}$<br>MGF：$M(t) = \sum_{x=1}^{\infty} e^{tx}(1-p)^{x-1}p$，提出 $pe^t$，用几何级数 | 求恰好第$x$次: $P(X=x) = (1-p)^{x-1}p$<br>求期望: $\mathbb{E}[X] = 1/p$<br>求方差: $Var(X) = (1-p)/p^2$<br>求MGF: $M(t) = \frac{pe^t}{1-(1-p)e^t}$<br>$M'(t) = \frac{pe^t}{(1-(1-p)e^t)^2}$                             |
 | 一直单抽，直到抽出第 n 个金光才停手 | 一直做试验，**直到出现第$r$次成功**才停。<br>触发词: "the first time... $r$ items"                               | **负二项分布** Negative Binomial $Ne(r, p)$<br>👉 **支持集:** $x \in \{r, r+1, \dots\}$<br>$r$要凑齐几个，$p$单次中奖率。<br><br>**核心推导：**<br>关键：负二项式定理 $\sum_{k=0}^{\infty} \binom{k+r-1}{r-1}q^k = (1-q)^{-r}$<br>期望：$\mathbb{E}[X] = \sum_{x=r}^{\infty} x \binom{x-1}{r-1}p^r(1-p)^{x-r}$<br>方差：$\mathbb{E}[X^2] = \sum_{x=r}^{\infty} x^2 \binom{x-1}{r-1}p^r(1-p)^{x-r}$<br>MGF：$M(t) = \sum_{x=r}^{\infty} e^{tx} \binom{x-1}{r-1}p^r(1-p)^{x-r}$，换元 $k=x-r$，提出 $p^r e^{tr}$                                                                                                                                                    | 求恰好第$x$次: $P(X=x) = \binom{x-1}{r-1}p^r(1-p)^{x-r}$<br>求期望: $\mathbb{E}[X] = r/p$<br>求方差: $Var(X) = r(1-p)/p^2$<br>求MGF: $M(t) = \left(\frac{pe^t}{1-(1-p)e^t}\right)^r$                                    |
 | 蹲在路口，数一个小时内过去了多少辆车  | **固定时间/空间内**，随机事件发生的次数。<br>触发词: "rate of $\lambda$",<br>"per hour/day/minute"                | **泊松分布** Poisson $P(\lambda)$<br>👉 **支持集:** $x \in \{0, 1, 2, \dots\}$<br>$\lambda$平均发生频率，$x$实际发生几次。<br><br>**核心推导：**<br>关键：指数函数展开 $\sum_{k=0}^{\infty} \frac{a^k}{k!} = e^a$<br>期望：$\mathbb{E}[X] = \sum_{x=0}^{\infty} x \frac{\lambda^x e^{-\lambda}}{x!}$，提出 $\lambda e^{-\lambda}$，用 $\sum_{x=1}^{\infty} \frac{\lambda^{x-1}}{(x-1)!}$<br>方差：$\mathbb{E}[X^2] = \sum_{x=0}^{\infty} x^2 \frac{\lambda^x e^{-\lambda}}{x!}$<br>MGF：$M(t) = \sum_{x=0}^{\infty} e^{tx} \frac{\lambda^x e^{-\lambda}}{x!}$，提出 $e^{-\lambda}$，把 $\lambda e^t$ 看成 $a$                                                                                                                                     | 求恰好发生$x$次: $P(X=x) = \frac{\lambda^x e^{-\lambda}}{x!}$<br>求期望: $\mathbb{E}[X] = \lambda$<br>求方差: $Var(X) = \lambda$<br>求MGF: $M(t) = e^{\lambda(e^t-1)}$<br>$M'(t) = e^{\lambda(e^t-1)} \cdot \lambda e^t$ |
-#### 2️⃣连续随机变量对照查找表
+# 2️⃣连续随机变量对照查找表
 
 |                       | **情景描述与触发词 (Scenarios & Keywords)**                                                                                          | **锁定模型 (Distribution)**                                                                                                | **标准解题动作 (四大公式闭眼套 + MGF求导)**                                                                                                                                                                                                                            |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,7 +19,7 @@
 | 等到第 $\alpha$ 个客人进店的时间 | 泊松过程中，**等待第 $\alpha$ 次事件发生**所需的时间。<br>触发词: "time until the $\alpha$-th event",<br>"sum of $\alpha$ independent exponentials" | **伽玛分布** Gamma $\mathcal{G}(\alpha, \lambda)$<br>👉 **支持集:** $x \in (0, \infty)$ 即 $x>0$<br>$\alpha$目标次数，$\lambda$发生率。<br><br>**核心推导：**<br>关键：伽玛函数 $\Gamma(\alpha) = \int_0^{\infty} x^{\alpha-1} e^{-x} dx$，$\Gamma(n) = (n-1)!$<br>期望：$\mathbb{E}[X] = \int_0^{\infty} x \cdot \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x} dx$<br>方差：$\mathbb{E}[X^2] = \int_0^{\infty} x^2 \cdot \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x} dx$<br>MGF：换元 $u = (\lambda-t)x$，利用 $\int_0^{\infty} u^{\alpha-1} e^{-u} du = \Gamma(\alpha)$ | 密度函数(PDF): $f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}$<br>求期望: $\mathbb{E}[X] = \alpha/\lambda$<br>求方差: $Var(X) = \alpha/\lambda^2$<br>求MGF: $M(t) = (\frac{\lambda}{\lambda-t})^\alpha$ (需 $t<\lambda$)                   |
 | 机器次品率的分布 / 均匀分布的次序统计量 | 描述一个**比例、概率**，或者变量被**限制在 $[0,1]$ 区间**内。<br>触发词: "proportion", "fraction",<br>"random variable between 0 and 1"               | **贝塔分布** Beta $\mathcal{B}e(\alpha, \beta)$<br>👉 **支持集:** $x \in (0, 1)$<br>常用于贝叶斯统计中作为概率 $p$ 的先验。<br><br>**核心推导：**<br>关键：贝塔函数 $B(\alpha,\beta) = \int_0^1 x^{\alpha-1}(1-x)^{\beta-1} dx = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$<br>期望：$\mathbb{E}[X] = \int_0^1 x \cdot \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1} dx = \frac{B(\alpha+1,\beta)}{B(\alpha,\beta)}$<br>方差：$\mathbb{E}[X^2] = \int_0^1 x^2 \cdot f(x) dx = \frac{B(\alpha+2,\beta)}{B(\alpha,\beta)}$<br>MGF：无简洁闭式解，考试一般不考    | 密度函数(PDF): $f(x) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}$<br>求期望: $\mathbb{E}[X] = \frac{\alpha}{\alpha+\beta}$<br>求方差: $Var(X) = \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$<br>求MGF: (考试一般不考) |
 
-#### 3️⃣ PDF - CDF 与联合分布转换公式 (1D vs 2D)
+# 3️⃣ PDF - CDF 与联合分布转换公式 (1D vs 2D)
 
 | **特性 / 动作**                      | **一维单变量 (1D)**                                                     | **二维联合分布 (2D Joint)**                                                                                                                                                        |
 | :------------------------------- | :----------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -43,7 +43,7 @@
 如果题目让你判断 $X$ 和 $Y$ 是否独立，**先看积分范围（支持集）！**
 如果 $x$ 和 $y$ 的范围是互相牵制的（比如 $0 < x < y < 1$），**直接秒杀：绝对不独立！** 连算都不用算。只有当范围是矩形（比如 $0<x<1, 0<y<2$），才需要去验证 $f(x,y) = f_X(x)f_Y(y)$。
 
-#### 4️⃣计算结论
+# 4️⃣计算结论
 
 | **类型**   | **积分式**                                                   | **结果**               | **常见用途**       |
 | -------- | --------------------------------------------------------- | -------------------- | -------------- |
@@ -54,26 +54,27 @@
 | 指数函数     | $\sum_{k=0}^{\infty} \frac{a^k}{k!}$                      | $e^a$                | 化简求和式子         |
 | 伽马函数     | $\int_{0}^{\infty} x^n e^{-ax} dx$                        | $\frac{n!}{a^{n+1}}$ |                |
 | 尾概率      | $P(X > n) = \sum_{x=n+1}^{\infty} (1-\theta)^{x-1}\theta$ | $(1-\theta)^n$       | 知道n+1次或更晚才发生   |
-#### 5️⃣ i.i.d数据表
+# 5️⃣ i.i.d数据表
 
-| **特性 / 统计量** | **均值 $\bar{X}_n$** | **最大值 $Y_n$** | **最小值 $Z_n$** |
-| :--- | :--- | :--- | :--- |
-| **数学表达** | $\bar{X}_n = \frac{1}{n}\sum X_i$ | $Y_n = \max\{X_1,\dots,X_n\}$ | $Z_n = \min\{X_1,\dots,X_n\}$ |
-| **CDF** | *(无通用公式，依赖原分布)* | $F_{Y_n}(x)= \mathbf{[F(x)]^n}$ | $F_{Z_n}(x)= \mathbf{1 - [1 - F(x)]^n}$ |
-| **PDF** | *(无通用公式，依赖原分布)* | $f_{Y_n}(x) = n[F(x)]^{n-1}f(x)$ | $f_{Z_n}(x) = n[1 - F(x)]^{n-1}f(x)$ |
-| **本身的问题** | 趋向常数 $\mu$（WLLN） | 趋向 $+\infty$ | 趋向 $-\infty$（或0） |
-| **怎么拉回来** | 减 $\mu$，再除以 $\sigma/\sqrt{n}$（CLT方法） | 减 $\log n$ | 乘以 $n$ |
-| **极限分布** | $N(0,1)$ | Gumbel，$e^{-e^{-x}}$ | 指数分布 |
+| **特性 / 统计量** | **均值 $\bar{X}_n$**                   | **最大值 $Y_n$**                                              | **最小值 $Z_n$**                           |
+| :----------- | :----------------------------------- | :--------------------------------------------------------- | :-------------------------------------- |
+| **数学表达**     | $\bar{X}_n = \frac{1}{n}\sum X_i$    | $Y_n = \max\{X_1,\dots,X_n\}$                              | $Z_n = \min\{X_1,\dots,X_n\}$           |
+| **CDF**      | *(无通用公式，依赖原分布)*                      | $F_{Y_n}(x)= \mathbb{P}(Y_n \leq x)$ $= \mathbf{[F(x)]^n}$ | $F_{Z_n}(x)= \mathbf{1 - [1 - F(x)]^n}$ |
+| **PDF**      | *(无通用公式，依赖原分布)*                      | $f_{Y_n}(x) =\mathbb{P}(Y_n \leq x)$$=1 - [1-F(x)]^n$      | $f_{Z_n}(x) = n[1 - F(x)]^{n-1}f(x)$    |
+| **本身的问题**    | 趋向常数 $\mu$（WLLN）                     | 趋向 $+\infty$                                               | 趋向 $-\infty$（或0）                        |
+| **怎么拉回来**    | 减 $\mu$，再除以 $\sigma/\sqrt{n}$（CLT方法） | 减 $\log n$                                                 | 乘以 $n$                                  |
+| **极限分布**     | $N(0,1)$                             | Gumbel，$e^{-e^{-x}}$                                       | 指数分布                                    |
 
-#### 6️⃣导数速查表
+# 6️⃣导数速查表
 
-| <span style="background-color: #e3f2fd;">函数 $f(x)$</span>         | <span style="background-color: #fff3e0;">导数 $f'(x)$</span>             | <span style="background-color: #e3f2fd;">函数 $f(x)$</span>      | <span style="background-color: #fff3e0;">导数 $f'(x)$</span>                | <span style="background-color: #e3f2fd;">函数 $f(x)$</span>          | <span style="background-color: #fff3e0;">导数 $f'(x)$</span>                 |
-| ----------------- | ---------------------- | -------------- | ------------------------- | ------------------ | -------------------------- |
-| $x^n$             | $nx^{n-1}$             | $\sin x$       | $\cos x$                  | $\cos x$           | $-\sin x$                  |
-| $e^x$             | $e^x$                  | $\tan x$       | $\sec^2 x$                | $\cot x$           | $-\csc^2 x$                |
-| $a^x$             | $a^x \ln a$            | $\sec x$       | $\sec x \tan x$           | $\csc x$           | $-\csc x \cot x$           |
-| $\ln x$           | $\dfrac{1}{x}$         | $\arcsin x$    | $\dfrac{1}{\sqrt{1-x^2}}$ | $\arccos x$        | $-\dfrac{1}{\sqrt{1-x^2}}$ |
-| $\log_a x$        | $\dfrac{1}{x \ln a}$   | $\arctan x$    | $\dfrac{1}{1+x^2}$        | $\text{arccot } x$ | $-\dfrac{1}{1+x^2}$        |
-| $\sqrt{x}$        | $\dfrac{1}{2\sqrt{x}}$ | $\dfrac{1}{x}$ | $-\dfrac{1}{x^2}$         | $e^{ax}$           | $ae^{ax}$                  |
-| $\ln(ax)$         | $\dfrac{1}{x}$         | $x\ln x$       | $\ln x + 1$               | $(ax+b)^n$         | $na(ax+b)^{n-1}$           |
-| $\dfrac{1}{ax+b}$ | $-\dfrac{a}{(ax+b)^2}$ | $\sin(ax)$     | $a\cos(ax)$               | $\cos(ax)$         | $-a\sin(ax)$               |
+| <span style="background-color: #e3f2fd;">函数 $f(x)$</span> | <span style="background-color: #fff3e0;">导数 $f'(x)$</span> | <span style="background-color: #e3f2fd;">函数 $f(x)$</span> | <span style="background-color: #fff3e0;">导数 $f'(x)$</span> | <span style="background-color: #e3f2fd;">函数 $f(x)$</span> | <span style="background-color: #fff3e0;">导数 $f'(x)$</span> |
+| --------------------------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- |
+| $x^n$                                                     | $nx^{n-1}$                                                 | $\sin x$                                                  | $\cos x$                                                   | $\cos x$                                                  | $-\sin x$                                                  |
+| $e^x$                                                     | $e^x$                                                      | $\tan x$                                                  | $\sec^2 x$                                                 | $\cot x$                                                  | $-\csc^2 x$                                                |
+| $a^x$                                                     | $a^x \ln a$                                                | $\sec x$                                                  | $\sec x \tan x$                                            | $\csc x$                                                  | $-\csc x \cot x$                                           |
+| $\ln x$                                                   | $\dfrac{1}{x}$                                             | $\arcsin x$                                               | $\dfrac{1}{\sqrt{1-x^2}}$                                  | $\arccos x$                                               | $-\dfrac{1}{\sqrt{1-x^2}}$                                 |
+| $\log_a x$                                                | $\dfrac{1}{x \ln a}$                                       | $\arctan x$                                               | $\dfrac{1}{1+x^2}$                                         | $\text{arccot } x$                                        | $-\dfrac{1}{1+x^2}$                                        |
+| $\sqrt{x}$                                                | $\dfrac{1}{2\sqrt{x}}$                                     | $\dfrac{1}{x}$                                            | $-\dfrac{1}{x^2}$                                          | $e^{ax}$                                                  | $ae^{ax}$                                                  |
+| $\ln(ax)$                                                 | $\dfrac{1}{x}$                                             | $x\ln x$                                                  | $\ln x + 1$                                                | $(ax+b)^n$                                                | $na(ax+b)^{n-1}$                                           |
+| $\dfrac{1}{ax+b}$                                         | $-\dfrac{a}{(ax+b)^2}$                                     | $\sin(ax)$                                                | $a\cos(ax)$                                                | $\cos(ax)$                                                | $-a\sin(ax)$                                               |
+*求导的时候记得，常数项要消去，不要无意识抄下来。*
