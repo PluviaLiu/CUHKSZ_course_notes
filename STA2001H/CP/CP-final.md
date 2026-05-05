@@ -127,37 +127,59 @@
 
 #### **① 定义与概念 (Definitions & Concepts)**
 1.  **联合分布 (Joint Distribution):**
-    *   **CDF:** $F(x,y) = P(X \le x, Y \le y)$。
-    *   **离散 PMF:** $f(x,y) = P(X=x, Y=y)$。
-    *   **连续 PDF:** $F(x,y) = \int_{-\infty}^y \int_{-\infty}^x f(u,v)dudv$。
+    *   **联合 CDF:** $F(x,y) = P(X \le x, Y \le y)$。
+        *   性质: (i) 非降, (ii) 右连续, (iii) $\lim_{x,y\to-\infty} F(x,y) = 0$, (iv) $\lim_{x,y\to\infty} F(x,y) = 1$。
+    *   **离散型 (Jointly Discrete):** 若 $(X,Y)$ 只取可数个值，则有联合 PMF $f(x,y) = P(X=x, Y=y)$。
+        *   性质: (i) $f(x,y) \ge 0$, (ii) $\sum_x \sum_y f(x,y) = 1$。
+    *   **连续型 (Jointly Continuous):** 若存在联合 PDF $f: \mathbb{R}^2 \to [0, \infty)$ 使得 $F(x,y) = \int_{-\infty}^y \int_{-\infty}^x f(u,v)dudv$。
+        *   性质: (i) $f(x,y) \ge 0$, (ii) $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy = 1$。
+        *   关系: $f(x,y) = \frac{\partial^2 F(x,y)}{\partial x \partial y}$ (在连续点处)。
+        *   ⚠️ $f(x,y)$ 不是概率, $P(X=x, Y=y)=0$。
 2.  **边缘分布 (Marginal Distribution):**
-    *   **PMF:** $f_X(x) = \sum_y f(x,y)$。
-    *   **PDF:** $f_X(x) = \int_{-\infty}^\infty f(x,y)dy$。
-3.  **条件分布 (Conditional Distribution):** $f(y|x) = \frac{f(x,y)}{f_X(x)}$ (要求 $f_X(x)>0$)。
-4.  **协方差 (Covariance):** $Cov(X,Y) = E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y]$。
-5.  **相关系数 (Correlation):** $\rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$，其中 $|\rho| \le 1$。
-6.  **顺序统计量 (Order Statistics):** 随机样本 $X_1, \dots, X_n$ 从小到大排序后的值 $X_{(1)} \le \dots \le X_{(n)}$。
-7.  **泊松过程 (Poisson Process):** 速率为 $\lambda$ 的计数过程 $\{N_t\}$。
+    *   **离散 PMF:** $f_X(x) = \sum_y f(x,y)$。
+    *   **连续 PDF:** $f_X(x) = \int_{-\infty}^\infty f(x,y)dy$。
+    *   💡 **口诀：求谁就不积谁** (求 $X$ 的边缘，就把 $y$ 积分积掉)。
+3.  **条件分布 (Conditional Distribution):** 
+    *   **离散:** $f(y|x) = \frac{f(x,y)}{f_X(x)}$ (要求 $f_X(x)>0$)。
+    *   **连续:** $f(y|x) = \frac{f(x,y)}{f_X(x)}$ (要求 $f_X(x)>0$)。
+    *   💡 **口诀：条件在下，联合在上**。
+4.  **独立性 (Independence):**
+    *   **离散:** $X, Y$ 独立 $\iff f(x,y) = f_X(x) \cdot f_Y(y)$ 对所有 $(x,y)$ 成立。
+    *   **连续:** $X, Y$ 独立 $\iff f(x,y) = f_X(x) \cdot f_Y(y)$ 对所有 $(x,y)$ 成立。
+    *   **通用 CDF:** $X, Y$ 独立 $\iff F(x,y) = F_X(x) \cdot F_Y(y)$ 对所有 $(x,y)$ 成立。
+    *   ⚠️ **支持集检验**: 若 $x$ 和 $y$ 的取值范围相互依赖（如 $0 < x < y < 1$），则**直接判定不独立**，无需验证公式。
+5.  **协方差 (Covariance):** $Cov(X,Y) = E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y]$。
+6.  **相关系数 (Correlation):** $\rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$，其中 $|\rho| \le 1$。
+7.  **顺序统计量 (Order Statistics):** 随机样本 $X_1, \dots, X_n$ 从小到大排序后的值 $X_{(1)} \le \dots \le X_{(n)}$。
+8.  **泊松过程 (Poisson Process):** 速率为 $\lambda$ 的计数过程 $\{N_t\}$。
     *   $N_0=0$。
     *   增量独立且平稳。
     *   $N_t - N_s \sim P(\lambda(t-s))$。
-8.  **多维正态分布 (Multivariate Normal):** 随机向量 $(X_1, \dots, X_d)$ 的任意线性组合 $\sum t_j X_j$ 均服从正态分布。
+9.  **多维正态分布 (Multivariate Normal):** 随机向量 $(X_1, \dots, X_d)$ 的任意线性组合 $\sum t_j X_j$ 均服从正态分布。
 
 #### **② 公式与方程 (Formulas & Equations)**
-1.  **全期望公式 (Law of Total Expectation):** $E[Y] = E[E[Y|X]]$。
+1.  **联合期望 (Joint Expectation):**
+    *   **离散:** $E[g(X,Y)] = \sum_x \sum_y g(x,y) f(x,y)$。
+    *   **连续:** $E[g(X,Y)] = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x,y) f(x,y) dxdy$。
+    *   **特例:** $E[XY] = \int_{-\infty}^\infty \int_{-\infty}^\infty xy \cdot f(x,y) dxdy$ (用于计算协方差)。
+2.  **条件期望 (Conditional Expectation):**
+    *   **离散:** $E[Y|X=x] = \sum_y y \cdot f(y|x)$。
+    *   **连续:** $E[Y|X=x] = \int_{-\infty}^\infty y \cdot f(y|x) dy$。
+    *   ⚠️ **注意**: 积分里用的是**条件 PDF** $f(y|x)$，不是联合 PDF $f(x,y)$。
+3.  **全期望公式 (Law of Total Expectation):** $E[Y] = E[E[Y|X]]$。
     *   **Taking out what is known**: $E[g(X)Y | X] = g(X) E[Y|X]$。
     *   *直观理解*：在已知 $X$ 的条件下，$g(X)$ 就像一个常数，可以提到期望符号外面。
-2.  **条件方差公式 (Law of Total Variance):** $Var(Y) = E[Var(Y|X)] + Var(E[Y|X])$。
-3.  **随机变量函数转换 (Change of Variables):**
+4.  **条件方差公式 (Law of Total Variance):** $Var(Y) = E[Var(Y|X)] + Var(E[Y|X])$。
+5.  **随机变量函数转换 (Change of Variables):**
     *   **一维:** $Y=g(X)$, $f_Y(y) = f_X(g^{-1}(y)) |\frac{d}{dy}g^{-1}(y)|$。
     *   **多维:** $(Y_1, Y_2) = T(X_1, X_2)$, $g(y_1, y_2) = f(T^{-1}(y_1, y_2)) |J|$。其中 $J$ 是 $T^{-1}$ 变换的雅可比行列式 (Jacobian) 的绝对值。
-4.  **顺序统计量 PDF:** $X_{(j)}$ 的 PDF 为 $f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!} f(x) [F(x)]^{j-1} [1-F(x)]^{n-j}$。
-5.  **泊松过程与指数分布:** 泊松过程的事件间隔时间服从独立的指数分布，参数为 $\lambda$。
-6.  **正态相关分布 (Distributions related to Normal):**
+6.  **顺序统计量 PDF:** $X_{(j)}$ 的 PDF 为 $f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!} f(x) [F(x)]^{j-1} [1-F(x)]^{n-j}$。
+7.  **泊松过程与指数分布:** 泊松过程的事件间隔时间服从独立的指数分布，参数为 $\lambda$。
+8.  **正态相关分布 (Distributions related to Normal):**
     *   若 $Z_i \stackrel{i.i.d.}{\sim} N(0,1)$, 则 $\sum_{i=1}^n Z_i^2 \sim \chi_n^2$ (卡方分布 Chi-squared)。
     *   若 $Z \sim N(0,1), Y \sim \chi_n^2$ 且独立, 则 $\frac{Z}{\sqrt{Y/n}} \sim t_n$ (t-分布)。
     *   若 $X \sim \chi_{d_1}^2, Y \sim \chi_{d_2}^2$ 且独立, 则 $\frac{X/d_1}{Y/d_2} \sim F_{d_1, d_2}$ (F-分布)。
-7.  **随机项数之和 (Compound Distribution / Random Sums):**
+9.  **随机项数之和 (Compound Distribution / Random Sums):**
     *   设 $Z = X_1 + X_2 + \dots + X_N$，其中 $N$ 是随机变量，$X_i$ 是 i.i.d. 且独立于 $N$。
     *   **PGF 复合公式**: $G_Z(s) = G_N(G_X(s))$ （记忆法：$N$ 在外面，因为 $N$ 决定了层数）
     *   **MGF 复合公式**: $M_Z(t) = G_N(M_X(t))$ 或 $M_N(\ln M_X(t))$
