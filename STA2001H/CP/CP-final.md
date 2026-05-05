@@ -17,7 +17,7 @@
     - 通用CDF：$\forall x, y, F_{X,Y}(x,y) = F_X(x)F_Y(y)$
     - 用PDF表达：$f(x,y) = f_X(x) \cdot f_Y(y)$，对所有 $(x,y)$ 成立
 4.  **划分 (Partition):** 集合族 $\{B_i\}$ 是 $\Omega$ 的划分, 若 $B_i$ 互斥 ($B_i \cap B_j = \emptyset, \forall i \neq j$) 且 $\bigcup_i B_i = \Omega$.
-
+5. 考试公式先写：$Consider probability space (Ω, F , P) and let A, B ∈ F with P(A), P(B) > 0.$
 #### **② 公式与定理 (Formulas & Theorems)**
 1.  **计数 (Counting):** 排列 (Permutation) $P(n,k) = \frac{n!}{(n-k)!}$, 组合 (Combinatic lion) $C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$.
 2.  **基本性质 (Properties):**
@@ -177,50 +177,6 @@
 1.  **通过特征函数判断依分布收敛:** $X_n \xrightarrow{d} X \iff \lim_{n\to\infty} \phi_{X_n}(t) = \phi_X(t)$ 对所有 $t$ 成立。
 2.  **CLT 应用:** 提供了用正态分布近似大量 i.i.d. 随机变量之和的分布的理论依据。
 
-#### 1. 定义是什么？
-想象你在**反复扔同一枚硬币**：
-- 每次扔都**不受上一次影响**（独立）
-- 每次扔的硬币**是同一枚**，正面概率永远是 50%（同分布）
-
-[[独立 (Independent)]]
-$$\mathbb{P}(X_1 \in A_1, X_2 \in A_2, \dots, X_n \in A_n) = \prod_{i=1}^n \mathbb{P}(X_i \in A_i)$$
-[[同分布 (Identically Distributed)]]
-$$F_{X_1}(x) = F_{X_2}(x) = \cdots = F_{X_n}(x) = F(x), \quad \forall x$$
-
----
-
-#### 2. 如何理解这个条件？
-已知，有 $n$ 个 i.i.d. 随机变量 $X_1, X_2, \dots, X_n$。
-
-问题是：$\text{当 } n \to \infty,\quad Y_n \text{ 这个随机变量的分布长什么样？}$（要减去/除以（最小值）一个具体的值）（$n$ 越大，最大值 $Y_n$ 会越来越大（因为抽的人越多，最大值只会增不会减）。所以 $Y_n$ 本身趋向 $+\infty$，没有极限分布。所以需要变换）
-
-具体例子：（原来的量**减去某个东西**之后，极限分布是一个固定的形状）
-$$\underbrace{\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}}}_{\text{平均值标准化}} \xrightarrow{d} N(0,1) \qquad \text{vs} \qquad \underbrace{Y_n - \log n}_{\text{最大值平移}} \xrightarrow{d} \text{Gumbel}$$
-
-|                | 本身的问题            | 怎么拉回来                                | 极限分布     |
-| -------------- | ---------------- | ------------------------------------ | -------- |
-| 均值 $\bar{X}_n$ | 趋向常数 $\mu$（WLLN） | 减 $\mu$，再除以 $\sigma/\sqrt{n}$（CLT方法） | $N(0,1)$ |
-| 最大值 $Y_n$      | 趋向 $+\infty$     | 减 $\log n$                           | Gumbel   |
-| 最小值 $Z_n$      | 趋向 $-\infty$（或0） | 乘以 $n$                               | 指数分布     |
-
-
----
-
-#### 3. 这个条件能推导出什么？
-
-对于同一批数据，我们可以：
-
-|          | 数学表达                              | 研究它的定理     |
-| -------- | --------------------------------- | ---------- |
-| 求**平均**  | $\bar{X}_n = \frac{1}{n}\sum X_i$ | WLLN / CLT |
-| 取**最大值** | $Y_n = \max\{X_1,\dots,X_n\}$     | Gumbel分布   |
-| 取**最小值** | $Z_n = \min\{X_1,\dots,X_n\}$     | 指数分布（本题）   |
-
-- **WLLN**：平均值会收敛到一个**常数** $\mu$
-- **CLT**：标准化后的均值，**分布**趋向正态 $N(0,1)$
-- **Gumbel**：$Y_n$ 做变换后，它的 **CDF** 趋向 $e^{-e^{-x}}$，即最大值的**分布形状**趋向 Gumbel 分布
-
-
 ---
 
 #### 4. 考试时可以干什么？
@@ -242,14 +198,3 @@ $$\underbrace{\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}}}_{\text{平均值标准化
 ↓ 得到极限 CDF，验证合法性
 
 ↓ 认出它叫什么名字（加分，不认识也没关系）
-
-
-#### 三种极值分布 (Extreme Value Distributions)
-
-极值理论告诉我们，最大值的极限分布只有三种可能，取决于原始分布 $F(x)$ 的**尾部形状 (tail behavior)**：
-
-| 类型 | 极限分布 | 原始分布的尾部 | 例子 |
-| --- | --- | --- | --- |
-| **Gumbel** | $e^{-e^{-x}}$ | 指数型衰减（轻尾） | 正态分布、指数分布、**Logistic分布** |
-| **Fréchet** | $e^{-x^{-\alpha}}$ | 幂律衰减（重尾） | Pareto分布、t分布 |
-| **Weibull** | $e^{-(-x)^\alpha}$ | 有有限上界 | 均匀分布 |
